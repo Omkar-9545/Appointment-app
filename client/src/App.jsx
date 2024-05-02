@@ -9,6 +9,7 @@ import { Error } from './pages/Error';
 import { Footer } from './components/Footer/Footer';
 import { Logout } from './pages/Logout';
 import { Logo } from './components/logo/Logo';
+import { Kolhapur } from './pages/city1-hospital';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Service />} />
+          <Route path="/kolhapur" element={<Kolhapur/>} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="*" element={<Error />} />
         </Routes>

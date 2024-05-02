@@ -6,6 +6,7 @@ const cors = require("cors");
 const connectDB = require('./utils/db');
 const errorMiddleware = require('./middlewares/error-middleware');
 const serviceroute = require('./router/service-router');
+const hospital1route = require('./router/hospitals1-router');
 
 //handling cors policy
 const corsOptions = {
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use("/api/auth", router); //ab iss path pe jana pdega
 app.use("/api/data", serviceroute);
+app.use("/api/hospital", hospital1route);
 
 app.use(errorMiddleware);
 

@@ -1,16 +1,17 @@
 import { useAuth } from "../store/auth";
 
-export const Service = () => {
-    const { service } = useAuth();
+export const Kolhapur = () => {
+    
+   const { hospital1 } = useAuth();
 
-    return (
-            <>
-                <section className="section-services">
-                    <div className="container">
-                    <h1 className="main-heading">Cities where Our Service is Available:</h1>
-                    </div>
-                    <div className="container grid grid-three-cols">
-                       {service.map((curElem, index) => {
+   return (
+           <>
+               <section className="section-services">
+                   <div className="container">
+                       <h1 className="main-heading">Hospitals</h1>
+                   </div>
+                   <div className="container grid grid-three-cols">
+                       {hospital1.map((curElem, index) => {
 
                            const { name, address, phone } = curElem;
 
@@ -32,7 +33,7 @@ export const Service = () => {
                            );
                        })}
                    </div>
-                </section>
-        </>
-    );     
+               </section>
+       </>
+   )      
 };

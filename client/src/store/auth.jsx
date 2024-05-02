@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect,useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -6,20 +6,14 @@ export const AuthProvider = ({ children }) => {
    
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
-    const [services, setServices] = useState([]);
-    const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
+    const [service, setService] = useState([]);
+    // const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
+    const [hospital1, setHospital1] = useState([]);
     
     const storeToken = (serverToken) => {
         setToken(serverToken)
         return localStorage.setItem("token", serverToken);
     }
-
-    let isLoggedIn = !!token;
-
-    const LogoutUser = () => {
-        setToken("");
-        return localStorage.removeItem('token');
-    };
 
     const userAuthentication = async() => {
         try {
@@ -29,41 +23,67 @@ export const AuthProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            
             if (response.ok) {
                 const data = await response.json();
+            setUser(data.userData);
                 // console.log("user data:",data.userData);
-                setUser(data.userData);
+                
             }
         } catch (error) {
             console.log("error fecthing data")
 
         }
     }
+    let isLoggedIn = !!token;
+
+    const LogoutUser = () => {
+        setToken("");
+        return localStorage.removeItem('token');
+    };
 
     //get all the list of services hospital in my case
-    const getServices = async() => {
+
+
+    const getService = async() => {
         try {
-            const response = await fetch("http://localhost:5000/api/data/services", {
+            const response = await fetch("http://localhost:5000/api/services", {
                 method: "GET",
             });
             if (response.ok) {
                 const data = await response.json();
                 // console.log(data);
-                setServices(data.message);
+                setService(data.message);
             }
         } catch (error) {
-            console.log(`Services frontend error ${error}`);
+            console.log(`City Data list frontend error ${error}`);
         }
-        forceUpdate();
     }
 
-    useEffect(() => {
-        getServices();
-        userAuthentication();
-    }, [reducerValue]);
+    const getHospital1 = async() => {
+        try {
+            const response = await fetch("http://localhost:5000/api/hospital/kolhapur", {
+                method: "GET",
+            });
+            if (response.ok) {
+                const data = await response.json();
+                // console.log(data);
+                setHospital1(data.message);
+            }
+        } catch (error) {
+            console.log(`Kolhapur Data list frontend error ${error}`);
+        }
+    }
 
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,services}}>
+
+    useEffect(() => {
+        userAuthentication();
+        getService();
+        getHospital1();
+    }, []);
+
+
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service}}>
         {children}
     </AuthContext.Provider>
 }

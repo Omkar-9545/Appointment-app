@@ -13,7 +13,7 @@ export const Login = () => {
 
     const navigate = useNavigate();
     const { storeToken } = useAuth();
-
+    
     const handleInput = (e) => {
         // console.log(e);
         let name = e.target.name;
@@ -27,7 +27,7 @@ export const Login = () => {
     //handling form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        // console.log(user);
         try {
             const response = await fetch(login_url, {
                 method: "POST",
@@ -42,7 +42,7 @@ export const Login = () => {
                 toast.success("Login Successful");
                 //localStorage.setItem('logtoken',res_data.token)
                 storeToken(res_data.token);
-                setUser({ email: "", password: ""});
+                setUser({ email: "", password: "" });
                 navigate('/');
                 // window.location.reload();
                                  // added because state variable token wasn't added as soon as we login 
