@@ -47,7 +47,7 @@ export const Register = () => {
                 storeToken(res_data.token);
                 setUser({ name: "", email: "", password: "", phone: ""});
                 toast.success("Registered Successfully");
-                navigate('/login')
+                navigate('/')
             } else {
                 toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
         }

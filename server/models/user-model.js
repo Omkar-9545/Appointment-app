@@ -27,6 +27,15 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default:false,
     },
+
+    notification: {
+        type: Array,
+        default:[]
+    },
+    seenNotification: {
+        type: Array,
+        default:[]
+    }
     
 });
 
@@ -53,10 +62,11 @@ userSchema.methods.generateToken = async function () {
             userId: this._id.toString(),
             email: this.email,
             isAdmin: this.isAdmin,
+            isDoctor:this.isDoctor,
         },
         process.env.JWT_SECRET,
         {
-         expiresIn:"1d",    
+         expiresIn:"3d",    
         }
         );
     } catch (error) {
