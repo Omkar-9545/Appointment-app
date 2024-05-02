@@ -10,6 +10,8 @@ import { Footer } from './components/Footer/Footer';
 import { Logout } from './pages/Logout';
 import { Logo } from './components/logo/Logo';
 import { Kolhapur } from './pages/city1-hospital';
+import { Gadhinglaj } from './pages/city2-hospital';
+import { Sangli } from './pages/city3-hospital';
 
 const App = () => {
   return (
@@ -23,7 +25,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Service />} />
-          <Route path="/kolhapur" element={<Kolhapur/>} />
+          <Route path="/kolhapur" element={<Kolhapur />} />
+          <Route path='/gadhinglaj' element={<Gadhinglaj />} />
+          <Route path='/sangli' element={<Sangli/>} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="*" element={<Error />} />
         </Routes>
