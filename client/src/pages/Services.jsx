@@ -1,5 +1,5 @@
 import { useAuth } from "../store/auth";
-
+import { NavLink } from "react-router-dom";
 export const Service = () => {
     const { service } = useAuth();
 
@@ -60,6 +60,9 @@ export const Service = () => {
                             );
                         }
                     })}
+                </div>
+                <div className="apply-doc">
+                    <NavLink className="link-doc" to="/apply-doctor">Apply Doctor</NavLink>
                 </div>
             </section>
     </>

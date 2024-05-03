@@ -12,6 +12,8 @@ import { Logo } from './components/logo/Logo';
 import { Kolhapur } from './pages/city1-hospital';
 import { Gadhinglaj } from './pages/city2-hospital';
 import { Sangli } from './pages/city3-hospital';
+import { ApplyDoctor } from './pages/applyDoctor';
+
 
 const App = () => {
   return (
@@ -27,7 +29,8 @@ const App = () => {
           <Route path="/services" element={<Service />} />
           <Route path="/kolhapur" element={<Kolhapur />} />
           <Route path='/gadhinglaj' element={<Gadhinglaj />} />
-          <Route path='/sangli' element={<Sangli/>} />
+          <Route path='/sangli' element={<Sangli />} />
+          <Route path='/apply-doctor' element={<ApplyDoctor/>} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="*" element={<Error />} />
         </Routes>
