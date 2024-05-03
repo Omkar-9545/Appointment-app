@@ -37,4 +37,21 @@ const docController = async(req,res) => {
     }
 }
 
-module.exports = docController;
+//handle all the notification
+const getNotification = async(req,res) => {
+    try {
+        const user = await User.findOne({ _id: req.body.userId });
+        const seenNotification = user.seenNotification;
+        const notification = user.notification;
+        seenNotification.push(...notification);
+        user.notification.length = 0;
+        user.seenNotification = notification;
+        const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification });
+        res.status(200).json({ message: "Fetched all notification successfully", data: updatedUser });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error fetching all notification", error });
+    }
+}
+
+module.exports = { docController, getNotification };

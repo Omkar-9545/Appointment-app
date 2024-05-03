@@ -11,6 +11,6 @@ router.route('/gadhinglaj').get(hospitals2);
 
 router.route("/sangli").get(hospitals3);
 
-router.route("/apply-doctor").post(docController);
+router.route("/apply-doctor").post(docController.docController);
 
 module.exports = router;
