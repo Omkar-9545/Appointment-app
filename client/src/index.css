@@ -293,3 +293,12 @@ a.active{
     grid-template-columns: repeat(auto-fit,minmax(40rem,1fr));
   }
 }
+
+.apply-doc{
+  display: flex;
+  margin-top: 6%;
+  margin-left: 6%;
+}
+.link-doc{
+  margin-left: 1.2rem;
+}

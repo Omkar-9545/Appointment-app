@@ -62,7 +62,8 @@ export const Service = () => {
                     })}
                 </div>
                 <div className="apply-doc">
-                    <NavLink className="link-doc" to="/apply-doctor">Apply Doctor</NavLink>
+                    <p>Are you a doctor? Get your account and start serving here :</p>
+                    <NavLink className="link-doc" to="/apply-doctor">click here</NavLink>
                 </div>
             </section>
     </>

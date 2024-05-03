@@ -10,12 +10,12 @@ const docController = async(req,res) => {
             await Doctor.create({ firstName, lastName, phone, email, specialization, experience }, { status: 'pending' });
         }
         else {
-            return res.status(400).json({ message: "Please fill all the data" });
+            return res.status(400).json({ message: "Please fill all the data" ,success:false});
         }
         //getting the admin to notify about the request of the doctor
         const adminUser = await User.findOne({ isAdmin: true });
         if (!adminUser) {
-            return res.status(404).json({ message: "Cannot find admin user!" });
+            return res.status(404).json({ message: "Cannot find admin user!" ,success:false});
         }
         const notification = adminUser.notification;
         const docId = await Doctor.findOne({ email: email });
@@ -29,11 +29,11 @@ const docController = async(req,res) => {
             }
         });
 
-        await User.findByIdAndUpdate(adminUser._id, { notification });
-        res.status(201).json({ message: "Doctor account applied successfully!" });
+        const updatedUser = await User.findByIdAndUpdate(adminUser._id, { notification });
+        res.status(201).json({ message: "Doctor account applied successfully!" ,data:updatedUser.notification,success:true});
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: "Error while applying for doctor" });
+        res.status(400).json({ message: "Error while applying for doctor" ,success:false});
     }
 }
 
@@ -47,10 +47,10 @@ const getNotification = async(req,res) => {
         user.notification.length = 0;
         user.seenNotification = notification;
         const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification });
-        res.status(200).json({ message: "Fetched all notification successfully", data: updatedUser });
+        res.status(200).json({ message: "Fetched all notification successfully", data: updatedUser ,success:true});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error fetching all notification", error });
+        res.status(500).json({ message: "Error fetching all notification", error ,success:false});
     }
 }
 
