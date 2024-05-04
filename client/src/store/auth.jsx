@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 setUser(data.userData);
             } else {
-                toast.error(data.message);
+                // toast.error(data.message);
             }
         } catch (error) {
            toast.error("Error fetching data from server")
