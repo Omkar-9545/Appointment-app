@@ -46,8 +46,15 @@ const getNotification = async(req,res) => {
         seenNotification.push(...notification);
         user.notification.length = 0;
         user.seenNotification = notification;
-        const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification });
-        res.status(200).json({ message: "Fetched all notification successfully", data: updatedUser ,success:true});
+        const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification }).select({password:0});
+        res.status(200).json({
+            message: "Fetched all notification successfully",
+            data: {
+                pendingnotification: updatedUser.notification,
+                seenNotification: updatedUser.seenNotification
+            },
+            success: true
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Error fetching all notification", error ,success:false});
