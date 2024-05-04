@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect,useState } from "react";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -25,15 +26,14 @@ export const AuthProvider = ({ children }) => {
                 },
             });
             setUser("");
+            const data = await response.json();
             if (response.ok) {
-                const data = await response.json();
-            setUser(data.userData);
-                // console.log("user data:",data.userData);
-                
-            } 
+                setUser(data.userData);
+            } else {
+                toast.error(data.message);
+            }
         } catch (error) {
-            console.log("error fecthing data")
-
+           toast.error("Error fetching data from server")
         }
        
     }
@@ -51,14 +51,16 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await fetch("http://localhost:5000/api/data/services", {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+            const res_data = await response.json()
             if (response.ok) {
-                const data = await response.json();
-                // console.log(data);
-                setService(data.message);
-            } 
+                setService(res_data.message);
+            }
         } catch (error) {
-            console.log(`City Data list frontend error ${error}`);
+            next(error);
         }
     }
 
@@ -66,10 +68,12 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await fetch("http://localhost:5000/api/hospital/kolhapur", {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+            const data = await response.json();
             if (response.ok) {
-                const data = await response.json();
-                // console.log(data);
                 setHospital1(data.message);
             }
         } catch (error) {
@@ -81,6 +85,9 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await fetch("http://localhost:5000/api/hospital/gadhinglaj", {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
             if (response.ok) {
                 const data = await response.json();
@@ -96,6 +103,9 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await fetch("http://localhost:5000/api/hospital/sangli", {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
             if (response.ok) {
                 const data = await response.json();
