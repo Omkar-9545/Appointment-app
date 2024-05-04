@@ -6,12 +6,12 @@ const docController = async(req,res) => {
     try {
         const { firstName, lastName, phone, email, specialization, experience } = req.body;
         
-        if(firstName && lastName && phone && email && specialization && experience){
-            await Doctor.create({ firstName, lastName, phone, email, specialization, experience }, { status: 'pending' });
+        if(experience < 0){
+            return res.status(400).json({ message: "Please fill in proper details" ,success:false});
         }
-        else {
-            return res.status(400).json({ message: "Please fill all the data" ,success:false});
-        }
+        
+        await Doctor.create({ firstName, lastName, phone, email, specialization, experience , status: 'pending' });
+
         //getting the admin to notify about the request of the doctor
         const adminUser = await User.findOne({ isAdmin: true });
         if (!adminUser) {
