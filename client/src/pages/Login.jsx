@@ -27,12 +27,11 @@ export const Login = () => {
     //handling form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(user);
         try {
             const response = await fetch(login_url, {
                 method: "POST",
                 headers: {
-                   "content-Type":"application/json"
+                   "Content-Type":"application/json"
                 },
                 body:JSON.stringify(user),
             });
@@ -46,7 +45,7 @@ export const Login = () => {
                 navigate('/');
                 // window.location.reload();
                 
-                                 // added because state variable token wasn't added as soon as we login 
+                                //  added because state variable token wasn't added as soon as we login 
                                 //  also we added a reducer hook to dyanmicaaly render the change of user 
                                 // profile upon login
             } else {
