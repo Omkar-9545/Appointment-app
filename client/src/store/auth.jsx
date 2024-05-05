@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [hospital1, setHospital1] = useState([]);
     const [hospital2, setHospital2] = useState([]);
     const [hospital3, setHospital3] = useState([]);
+    const [notification, setNotification] = useState([]);
 
     const storeToken = (serverToken) => {
         setToken(serverToken)
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }) => {
             });
             setUser("");
             const data = await response.json();
+            setNotification(data.notification);
             if (response.ok) {
                 setUser(data.userData);
             } else {
@@ -127,7 +129,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
 
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3}}>
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3,notification}}>
         {children}
     </AuthContext.Provider>
 }

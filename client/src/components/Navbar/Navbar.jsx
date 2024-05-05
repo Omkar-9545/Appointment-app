@@ -8,6 +8,11 @@ export const Navbar = () => {
     // let isLoggedIn = !!token;
     const { isLoggedIn } = useAuth();
     const { user } = useAuth();
+    const { notification } = useAuth();
+    let x;
+    if (user) {
+        x = user.notification.length;
+    }
     return (
         <>
             <header>
@@ -28,6 +33,12 @@ export const Navbar = () => {
                                             <li><NavLink to="/profile">{user.name}</NavLink></li>
                                             <li ><NavLink to="/services">Hospitals</NavLink> </li>
                                             <li><NavLink to="/logout">Logout</NavLink></li>
+                                            <li>
+                                                <a href="/notification" class="notification">
+                                                    <span><i class="fa fa-bell"></i></span>
+                                                    <span class="badge">{notification ? notification.length : x}</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </>
                                     :

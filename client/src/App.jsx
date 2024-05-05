@@ -13,6 +13,7 @@ import { Kolhapur } from './pages/city1-hospital';
 import { Gadhinglaj } from './pages/city2-hospital';
 import { Sangli } from './pages/city3-hospital';
 import { ApplyDoctor } from './pages/applyDoctor';
+import { Notification } from './pages/Notification';
 
 
 const App = () => {
@@ -30,7 +31,8 @@ const App = () => {
           <Route path="/kolhapur" element={<Kolhapur />} />
           <Route path='/gadhinglaj' element={<Gadhinglaj />} />
           <Route path='/sangli' element={<Sangli />} />
-          <Route path='/apply-doctor' element={<ApplyDoctor/>} />
+          <Route path='/apply-doctor' element={<ApplyDoctor />} />
+          <Route path='/notification' element={<Notification/>} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="*" element={<Error />} />
         </Routes>
