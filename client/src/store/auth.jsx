@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [hospital2, setHospital2] = useState([]);
     const [hospital3, setHospital3] = useState([]);
     const [notification, setNotification] = useState([]);
-
+    const [seenNotification, setseenNotification] = useState([]);
     const storeToken = (serverToken) => {
         setToken(serverToken)
         return localStorage.setItem("token", serverToken);
@@ -118,18 +118,58 @@ export const AuthProvider = ({ children }) => {
             console.log(`Gadhinglaj Data list frontend error ${error}`);
         }
     }
-
+    const getNotification = async() => {
+        try {
+            const response = await fetch("http://localhost:5000/api/admin/notification", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            // console.log(response)
+            if (response.ok) {
+                const data = await response.json();
+                // console.log(data)
+                if (data.data.notification) {
+                    setNotification(data.data.notification);
+                }
+                if (data.data.seenNotification) {
+                    setseenNotification(data.data.seenNotification)
+                }
+            }
+        } catch (error) {
+            console.log(`Gadhinglaj Data list frontend error ${error}`);
+        }
+    
+    }
 
     useEffect(() => {
         userAuthentication();
         getService();
-        getHospital1();
-        getHospital2();
-        getHospital3();
+        // getNotification();
     }, []);
 
+    if (token && (window.location.pathname == "/kolhapur")) {
+        useEffect(() => {
+            getHospital1();
+        }, []);
+    }
 
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3,notification}}>
+    if (token && (window.location.pathname == "/gadhinglaj")) {
+        useEffect(() => {
+            getHospital2();
+        }, []);
+    }
+
+    if (token && (window.location.pathname == "/sangli")) {
+        useEffect(() => {
+            getHospital3();
+        }, []);
+    }
+    
+
+
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3,notification,seenNotification}}>
         {children}
     </AuthContext.Provider>
 }

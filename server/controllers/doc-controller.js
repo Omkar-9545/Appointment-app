@@ -40,21 +40,33 @@ const docController = async(req,res) => {
 //handle all the notification
 const getNotification = async(req,res) => {
     try {
-        const user = await User.findOne({ _id: req.body.userId });
+        const user = await User.findOne({ isAdmin: true});
         const seenNotification = user.seenNotification;
         const notification = user.notification;
-        seenNotification.push(...notification);
-        user.notification.length = 0;
-        user.seenNotification = notification;
-        const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification }).select({password:0});
-        res.status(200).json({
-            message: "Fetched all notification successfully",
-            data: {
-                pendingnotification: updatedUser.notification,
-                seenNotification: updatedUser.seenNotification
-            },
-            success: true
-        });
+        if (notification.length) {
+            seenNotification.push(...notification);
+            user.notification.length = 0;
+            user.seenNotification = notification;
+
+            const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification }).select({ password: 0 });
+            res.status(200).json({
+                message: "Fetched all notification successfully",
+                data: {
+                    pendingnotification: updatedUser.notification,
+                    seenNotification: updatedUser.seenNotification
+                },
+                success: true
+            });
+        } else {
+            res.status(202).json({
+                message: "No pending notifications found",
+                data: {
+                    pendingNotification: [],
+                    seenNotification: seenNotification
+                },
+                success: true,
+            });
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Error fetching all notification", error ,success:false});
