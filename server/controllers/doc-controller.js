@@ -37,20 +37,20 @@ const docController = async(req,res) => {
     }
 }
 
-//handle all the notification
+//push all notification into seenNotification
 const getNotification = async(req,res) => {
     try {
         const user = await User.findOne({ isAdmin: true});
         const seenNotification = user.seenNotification;
         const notification = user.notification;
+        const userId = user._id;
         if (notification.length) {
             seenNotification.push(...notification);
             user.notification.length = 0;
-            user.seenNotification = notification;
-
-            const updatedUser = await User.findByIdAndUpdate(req.body.userId, { notification, seenNotification }).select({ password: 0 });
+            // user.seenNotification = notification;
+            const updatedUser = await User.findByIdAndUpdate(userId, { notification, seenNotification }).select({ password: 0 });
             res.status(200).json({
-                message: "Fetched all notification successfully",
+                message: "Pushed all notification successfully",
                 data: {
                     pendingnotification: updatedUser.notification,
                     seenNotification: updatedUser.seenNotification
@@ -69,8 +69,26 @@ const getNotification = async(req,res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error fetching all notification", error ,success:false});
+        res.status(500).json({ message: "Error pushing all notification", error ,success:false});
     }
 }
 
-module.exports = { docController, getNotification };
+const seeNotification = async(req,res) => {
+    try {
+        const user = await User.findOne({ isAdmin: true });
+        const notification = user.notification;
+        const seenNotification = user.seenNotification
+        if (notification && seenNotification) {
+            res.status(200).json({
+                message: "Fetched all notification succesfully", data: {
+                    unread: notification,
+                    read: seenNotification,
+                }
+            });
+        }
+    } catch (error) {
+        // console.log(error);
+        res.status(400).json({message:"Error in fetching notification",error})
+    }
+}
+module.exports = { docController, getNotification ,seeNotification};

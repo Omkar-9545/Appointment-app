@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         } catch (error) {
-            console.log(`Gadhinglaj Data list frontend error ${error}`);
+            console.log(`Notification pushing frontend error ${error}`);
         }
     
     }
