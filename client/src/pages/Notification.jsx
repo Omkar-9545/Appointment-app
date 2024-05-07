@@ -23,9 +23,31 @@ export const Notification = () => {
     return (
         <>
             <h1>Notifications:</h1>
-            <p>{Data.read[0]?("Read Messages:"+ Data.read[0].message):"No Read messages"}</p>
-            <p>{Data.unread[0]?("Unread Messages:"+Data.unread[0].message): "No Unread messages"}</p>
-            <p></p>
+            <p>Read Messages:</p>
+            <p>{ Data.read.length ?
+                (Data.read.map((ele,idx) => {
+                    const { data, message, type } = ele;
+                    return (
+                    <>
+                            <p>{message}</p>
+                    </>
+                    );
+                })):"No Read messages"
+            }
+            </p>
+            <br />
+            <p>Unread Messages:</p>
+            <p>{ Data.unread.length ?
+                (Data.unread.map((ele,idx) => {
+                    const { data, message, type } = ele;
+                    return (
+                    <>
+                            <p>{message}</p>
+                    </>
+                    );
+                })):"No Read messages"
+            }
+            </p>
         </>
     )
 };

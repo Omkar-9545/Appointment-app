@@ -8,7 +8,7 @@ export const Navbar = () => {
     // let isLoggedIn = !!token;
     const { isLoggedIn } = useAuth();
     const { user } = useAuth();
-    let x;
+    let x=0;
     if (user) {
         x = user.notification.length;
     }

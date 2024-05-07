@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect,useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -19,23 +20,17 @@ export const AuthProvider = ({ children }) => {
 
     const userAuthentication = async() => {
         try {
-            const response = await fetch("http://localhost:5000/api/auth/user", {
-                method: "GET",
+            const response = await axios.get("http://localhost:5000/api/auth/user", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setUser("");
-            const data = await response.json();
-            if (response.ok) {
-                setUser(data.userData);
-            } else {
-                // toast.error(data.message);
-            }
+            setUser(response.data.userData);
         } catch (error) {
-           toast.error("Error fetching data from server")
+            if (token) {
+                toast.error("Error fetching data from server")
+            }
         }
-       
     }
     let isLoggedIn = !!token;
 
@@ -117,7 +112,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
     
-
+   
     useEffect(() => {
         userAuthentication();
         getService();
