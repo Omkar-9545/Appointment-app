@@ -325,3 +325,11 @@ a.active{
   background: red;
   color: white;
 }
+
+.btn-submit {
+  margin-bottom: 15px !important;
+}
+
+.himg{
+  margin-bottom: 15px !important;
+}

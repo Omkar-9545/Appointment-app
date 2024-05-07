@@ -62,8 +62,8 @@ export const Home = () => {
             <section className="section-hero">
                 <div className="container grid grid-two-cols">
                     {/* hero images*/}
-                    <div className="hero-image">
-                        <img src="/images/homepage.jpg" alt="Home page image" width="800" height="500"/>
+                    <div className="hero-image himg">
+                        <img src="/images/homepage.jpg" alt="Home page image" width="800" height="600"/>
                     </div>
                     <div className="hero-content">
                         <h1 className="welcome-note">Level up your events:</h1>
