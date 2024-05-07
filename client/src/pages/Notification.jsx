@@ -1,14 +1,30 @@
-import { useAuth } from "../store/auth";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Notification = () => {
-    const { notfication } = useAuth();
-    const { seenNotification } = useAuth();
-    console.log(notfication)
+    const [Data, setData] = useState({
+        read: [],
+        unread: [],
+    });
+
+
+    const seeNotification = async() => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/admin/get-notification")
+            setData(response.data.data)
+        } catch (error) {
+            console.log(`Notification getting frontend error ${error}`);
+        }
+    }
+    useEffect(() => {
+        seeNotification();        
+    },[])
+   
     return (
         <>
             <h1>Notifications:</h1>
-            <p>Read Messages: {seenNotification.length ?"": "No Read Messages"}</p>
-            <p>Unread Messages: {notfication ?"":"No Unread messages"}</p>
+            <p>{Data.read[0]?("Read Messages:"+ Data.read[0].message):"No Read messages"}</p>
+            <p>{Data.unread[0]?("Unread Messages:"+Data.unread[0].message): "No Unread messages"}</p>
             <p></p>
         </>
     )

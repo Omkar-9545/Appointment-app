@@ -11,8 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [hospital1, setHospital1] = useState([]);
     const [hospital2, setHospital2] = useState([]);
     const [hospital3, setHospital3] = useState([]);
-    const [notification, setNotification] = useState([]);
-    const [seenNotification, setseenNotification] = useState([]);
+    
     const storeToken = (serverToken) => {
         setToken(serverToken)
         return localStorage.setItem("token", serverToken);
@@ -28,7 +27,6 @@ export const AuthProvider = ({ children }) => {
             });
             setUser("");
             const data = await response.json();
-            setNotification(data.notification);
             if (response.ok) {
                 setUser(data.userData);
             } else {
@@ -118,35 +116,11 @@ export const AuthProvider = ({ children }) => {
             console.log(`Gadhinglaj Data list frontend error ${error}`);
         }
     }
-    const getNotification = async() => {
-        try {
-            const response = await fetch("http://localhost:5000/api/admin/notification", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            // console.log(response)
-            if (response.ok) {
-                const data = await response.json();
-                // console.log(data)
-                if (data.data.notification) {
-                    setNotification(data.data.notification);
-                }
-                if (data.data.seenNotification) {
-                    setseenNotification(data.data.seenNotification)
-                }
-            }
-        } catch (error) {
-            console.log(`Notification pushing frontend error ${error}`);
-        }
     
-    }
 
     useEffect(() => {
         userAuthentication();
         getService();
-        // getNotification();
     }, []);
 
     if (token && (window.location.pathname == "/kolhapur")) {
@@ -169,7 +143,7 @@ export const AuthProvider = ({ children }) => {
     
 
 
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3,notification,seenNotification}}>
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,hospital1,service,hospital2,hospital3}}>
         {children}
     </AuthContext.Provider>
 }

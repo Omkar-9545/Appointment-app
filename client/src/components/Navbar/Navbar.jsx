@@ -8,7 +8,6 @@ export const Navbar = () => {
     // let isLoggedIn = !!token;
     const { isLoggedIn } = useAuth();
     const { user } = useAuth();
-    const { notification } = useAuth();
     let x;
     if (user) {
         x = user.notification.length;
@@ -36,7 +35,7 @@ export const Navbar = () => {
                                             <li>
                                                 <a href="/notification" class="notification">
                                                     <span><i class="fa fa-bell"></i></span>
-                                                    <span class="badge">{notification ? notification.length : x}</span>
+                                                    <span class="badge">{x}</span>
                                                 </a>
                                             </li>
                                         </ul>
