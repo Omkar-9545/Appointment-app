@@ -1,9 +1,29 @@
+import { useEffect } from "react";
 import { useAuth } from "../store/auth";
+import axios from "axios";
+import { useState } from "react";
 
 export const Kolhapur = () => {
-    
-   const { hospital1 } = useAuth();
+    const [hospital1, setHospital1] = useState([]);
     const { isLoggedIn } = useAuth();
+
+    const getHospital1 = async() => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/hospital/kolhapur", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            setHospital1(response.data.message)
+        } catch (error) {
+            console.log(`Kolhapur Data list frontend error ${error}`);
+        }
+    }
+
+    useEffect(() => {
+        getHospital1();        
+    },[])
+
     if (isLoggedIn) {
         return (
             <>
@@ -12,7 +32,8 @@ export const Kolhapur = () => {
                         <h1 className="main-heading">Hospitals</h1>
                     </div>
                     <div className="container grid grid-three-cols">
-                        {hospital1.map((curElem, index) => {
+                    {
+                            hospital1.map((curElem, index) => {
 
                             const { name, address, phone } = curElem;
 
