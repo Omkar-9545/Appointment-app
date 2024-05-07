@@ -19,7 +19,7 @@ export const Service = () => {
                                 return (
                                     <><div className="card" key={index}>
                                         <div className="card-img">
-                                            <a href="/kolhapur">Know more</a>
+                                            <NavLink to="/kolhapur" >Know more</NavLink>
                                         </div>
                                         <div className="card-details">
                                             <h2>{name}</h2>
@@ -34,7 +34,7 @@ export const Service = () => {
                                 return (
                                     <><div className="card" key={index}>
                                         <div className="card-img">
-                                            <a href="/gadhinglaj">Know more</a>
+                                            <NavLink to="/gadhinglaj">Know more</NavLink>
                                         </div>
                                         <div className="card-details">
                                             <h2>{name}</h2>
@@ -49,7 +49,7 @@ export const Service = () => {
                                 return (
                                     <><div className="card" key={index}>
                                         <div className="card-img">
-                                            <a href="/sangli">Know more</a>
+                                            <NavLink to="/sangli">Know more</NavLink>
                                         </div>
                                         <div className="card-details">
                                             <h2>{name}</h2>

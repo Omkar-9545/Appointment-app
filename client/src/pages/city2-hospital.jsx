@@ -1,9 +1,29 @@
+import { useEffect } from "react";
 import { useAuth } from "../store/auth";
+import axios from "axios";
+import { useState } from "react";
 
 export const Gadhinglaj = () => {
+    const [hospital2, setHospital2] = useState([]);
+    const { isLoggedIn } = useAuth();
     
-   const { hospital2 } = useAuth();
-   const { isLoggedIn } = useAuth();
+    const getHospital2 = async() => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/hospital/gadhinglaj", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            setHospital2(response.data.message)
+        } catch (error) {
+            console.log(`Gadhinglaj Data list frontend error ${error}`);
+        }
+    }
+
+    useEffect(() => {
+        getHospital2();
+    }, []);
+
     if (isLoggedIn) {
         return (
             <>
@@ -16,23 +36,23 @@ export const Gadhinglaj = () => {
 
                             const { name, address, phone } = curElem;
 
-                            return (
-                                <><div className="card" key={index}>
-                                    <div className="card-img">
-                                        {/* <a href="/login"> */}
-                                        <img src="./images/fortis.jpg" width="300" />
-                                        {/* </a> */}
-                                    </div>
-                                    <div className="card-details">
+                                    return (
+                                        
+                                            <div className="card" key={index}>
+                                            <div className="card-img">
+                                            {/* <a href="/login"> */}
+                                            <img src="./images/fortis.jpg" width="300" />
+                                            {/* </a> */}
+                                            </div>
+                                        <div className="card-details">
                                         <h2>{name}</h2>
                                         <p>Address: {address}</p>
                                         <p>Phone: {phone}</p>
-                                    </div>
-                                </div>
-                                </>
-                   
-                            );
-                        })}
+                                        </div>
+                                        </div>
+                                         
+                                )
+                    })};
                     </div>
                 </section>
             </>

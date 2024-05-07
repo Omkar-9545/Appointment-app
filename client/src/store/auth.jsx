@@ -9,8 +9,6 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
     const [service, setService] = useState([]);
-    const [hospital2, setHospital2] = useState([]);
-    const [hospital3, setHospital3] = useState([]);
     
     const storeToken = (serverToken) => {
         setToken(serverToken)
@@ -57,64 +55,13 @@ export const AuthProvider = ({ children }) => {
             next(error);
         }
     }
-
-    const getHospital2 = async() => {
-        try {
-            const response = await fetch("http://localhost:5000/api/hospital/gadhinglaj", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (response.ok) {
-                const data = await response.json();
-                // console.log(data);
-                setHospital2(data.message);
-            }
-        } catch (error) {
-            console.log(`Gadhinglaj Data list frontend error ${error}`);
-        }
-    }
-
-    const getHospital3 = async() => {
-        try {
-            const response = await fetch("http://localhost:5000/api/hospital/sangli", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (response.ok) {
-                const data = await response.json();
-                // console.log(data);
-                setHospital3(data.message);
-            }
-        } catch (error) {
-            console.log(`Gadhinglaj Data list frontend error ${error}`);
-        }
-    }
     
-   
     useEffect(() => {
         userAuthentication();
         getService();
     }, []);
-
-    if (token && (window.location.pathname == "/gadhinglaj")) {
-        useEffect(() => {
-            getHospital2();
-        }, []);
-    }
-
-    if (token && (window.location.pathname == "/sangli")) {
-        useEffect(() => {
-            getHospital3();
-        }, []);
-    }
     
-
-
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,service,hospital2,hospital3}}>
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,service}}>
         {children}
     </AuthContext.Provider>
 }
