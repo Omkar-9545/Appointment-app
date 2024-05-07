@@ -6,7 +6,7 @@ export const Notification = () => {
         read: [],
         unread: [],
     });
-
+    const [load, setLoad] = useState(1);
 
     const seeNotification = async() => {
         try {
@@ -16,38 +16,71 @@ export const Notification = () => {
             console.log(`Notification getting frontend error ${error}`);
         }
     }
+
+    const getNotification = async() => {
+        try {
+            await axios.get("http://localhost:5000/api/admin/notification")
+        } catch (error) {
+            console.log(`Notification getting frontend error ${error}`);
+        }
+        // window.location.reload()
+    }
+
     useEffect(() => {
-        seeNotification();        
-    },[])
+        if (load) {
+            seeNotification();
+            setLoad(0);
+        }
+    },[load])
    
     return (
         <>
-            <h1>Notifications:</h1>
-            <p>Read Messages:</p>
+            <div className="notification-div">
+                <h1>Notifications:</h1>
+            </div>
+            <div className="grid-two-cols">
+            <div className="read-message">
+                <div className="read-title">
+                    <p>Read Messages:</p>
+                </div>
+                
             <p>{ Data.read.length ?
                 (Data.read.map((ele,idx) => {
                     const { data, message, type } = ele;
                     return (
                     <>
-                            <p>{message}</p>
+                            <p>{`${idx+1} : ${message}`}</p>
                     </>
                     );
                 })):"No Read messages"
             }
-            </p>
+                </p>
+            </div>
+            <button className="read-button">
+                    Delete all read
+            </button>
             <br />
-            <p>Unread Messages:</p>
+            <div className="unread-message">
+                <div className="read-title">
+                    <p>Unread Messages:</p>
+                </div>
             <p>{ Data.unread.length ?
                 (Data.unread.map((ele,idx) => {
                     const { data, message, type } = ele;
                     return (
                     <>
-                            <p>{message}</p>
+                            <p>{`${idx+1}- ${message}`}</p>
                     </>
                     );
                 })):"No Read messages"
             }
-            </p>
+                </p>
+            </div>
+                <button className="unread-button" onClick={() => {
+                    getNotification();
+                    setLoad(1);
+                }}>Mark all read</button>
+                </div>
         </>
     )
 };

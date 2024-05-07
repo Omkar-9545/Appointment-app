@@ -46,7 +46,7 @@ export const Login = () => {
                 // window.location.reload();
                 
                                 //  added because state variable token wasn't added as soon as we login 
-                                //  also we added a reducer hook to dyanmicaaly render the change of user 
+                                //  also we added a reducer hook to dyanmically render the change of user 
                                 // profile upon login
             } else {
                 setUser({

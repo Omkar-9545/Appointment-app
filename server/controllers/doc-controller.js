@@ -44,29 +44,17 @@ const getNotification = async(req,res) => {
         const seenNotification = user.seenNotification;
         const notification = user.notification;
         const userId = user._id;
-        if (notification.length) {
             seenNotification.push(...notification);
             user.notification.length = 0;
-            // user.seenNotification = notification;
-            const updatedUser = await User.findByIdAndUpdate(userId, { notification, seenNotification }).select({ password: 0 });
+        const updatedUser = await User.findByIdAndUpdate(userId, { notification, seenNotification }).select({ password: 0 });
             res.status(200).json({
                 message: "Pushed all notification successfully",
                 data: {
-                    pendingnotification: updatedUser.notification,
+                    notification: updatedUser.notification,
                     seenNotification: updatedUser.seenNotification
                 },
                 success: true
             });
-        } else {
-            res.status(202).json({
-                message: "No pending notifications found",
-                data: {
-                    pendingNotification: [],
-                    seenNotification: seenNotification
-                },
-                success: true,
-            });
-        }
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Error pushing all notification", error ,success:false});

@@ -333,3 +333,28 @@ a.active{
 .himg{
   margin-bottom: 15px !important;
 }
+
+.notification-div{
+  display: flex;
+  justify-content: center;
+}
+
+.read-title{
+  margin-top: 15px;
+  font-weight: 800;
+  font-size: xx-large;
+  color: #99b9ff;
+}
+
+.read-button{
+  /* display: flex; */
+  margin-left: 70%;
+  margin-top: 0px;
+}
+
+.unread-button{
+  display: flex;
+  margin-left: 70%;
+  margin-top: 0px;
+  margin-bottom: 60px;
+}
