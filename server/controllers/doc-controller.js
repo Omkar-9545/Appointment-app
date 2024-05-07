@@ -79,4 +79,25 @@ const seeNotification = async(req,res) => {
         res.status(400).json({message:"Error in fetching notification",error})
     }
 }
-module.exports = { docController, getNotification ,seeNotification};
+
+const deleteNotification = async(req,res) => {
+    try {
+        const admin = await User.findOne({ isAdmin: true });
+        const userId = admin._id;
+        const seenNotification = admin.seenNotification
+        
+        seenNotification.length = 0;
+        // console.log(seenNotification)
+        const updatedUser = await User.findByIdAndUpdate(userId, { seenNotification }).select({ password: 0 });
+        res.status(201).json({
+            message: "Deleted all notification successfully", data: {
+                read: updatedUser.seenNotification,
+                unread: updatedUser.notification
+            }
+        });
+    } catch (error) {
+        res.status(400).json({message:"Error deleting all notification",error})
+    }
+}
+
+module.exports = { docController, getNotification ,seeNotification,deleteNotification};
