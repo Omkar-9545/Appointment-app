@@ -29,7 +29,9 @@ export const Notification = () => {
     const deleteNotification = async() => {
         try {
             const response = await axios.get("http://localhost:5000/api/admin/delete-notification");
-            console.log(response)
+            if(response.data.success){
+                deleteNotification();
+            }
         } catch (error) {
             console.log(`Notfication deletion error ${error}`);
         }

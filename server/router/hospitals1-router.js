@@ -14,6 +14,6 @@ router.route('/gadhinglaj').get(authMiddleware,hospitals2);
 
 router.route("/sangli").get(authMiddleware,hospitals3);
 
-router.route("/apply-doctor").post(validate(docSchema),docController.docController);
+router.route("/apply-doctor").post(validate(docSchema),docController);
 
 module.exports = router;

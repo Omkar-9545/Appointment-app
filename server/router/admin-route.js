@@ -1,19 +1,23 @@
 const express = require("express");
-const { getNotification, deleteNotification } = require("../controllers/doc-controller");
-const {seeNotification} = require("../controllers/doc-controller");
-const getAllUser = require("../controllers/admin-controller");
+const adminCtrl = require("../controllers/admin-controller");
 const authMiddleware = require("../middlewares/auth-middleware");
 const adminMiddleware = require("../middlewares/admin-middleware");
 const router = express.Router();
 
 
 //to get all notification from the database
-router.route("/notification").get(getNotification);
+router.route("/notification").get(adminCtrl.getNotification);
 
-router.route("/get-notification").get(seeNotification);
+router.route("/get-notification").get(adminCtrl.seeNotification);
 
-router.route("/delete-notification").get(deleteNotification)
+router.route("/delete-notification").get(adminCtrl.deleteNotification)
 
-router.route('/users').get(authMiddleware,adminMiddleware,getAllUser)
+router.route('/users').get(authMiddleware, adminMiddleware, adminCtrl.getAllUser)
+
+router.route("/users/:id").get(authMiddleware, adminMiddleware, adminCtrl.getUserbyId)
+
+router.route("/users/update/:id").patch(authMiddleware,adminMiddleware,adminCtrl.updateUser)
+
+router.route("/users/delete/:id").delete(authMiddleware,adminMiddleware,adminCtrl.deleteUser)
 
 module.exports = router;

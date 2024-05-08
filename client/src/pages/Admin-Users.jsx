@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const AdminUsers = () => {
 
     const [users, setUsers] = useState([]);
+    const [load, setLoad] = useState(1);
 
     const getAllUsers = async () => {
         try {
@@ -19,9 +21,29 @@ export const AdminUsers = () => {
         }
     };
 
+// delete the user on delete button
+    const deleteUser = async(id) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/admin/users/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            // console.log(response.data)
+            if (response.data.success) {
+                // deleteUser();
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(() => {
-        getAllUsers();
-    }, [])
+        if (load) {
+            getAllUsers();
+            setLoad(0)
+        }
+    }, [load])
     
     return (
         <>
@@ -36,8 +58,8 @@ export const AdminUsers = () => {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th>Doctor</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -46,8 +68,16 @@ export const AdminUsers = () => {
                                     <td>{curUser.name}</td>
                                     <td>{curUser.email}</td>
                                     <td>{curUser.phone}</td>
-                                    <td>Edit</td>
-                                    <td>Delete</td>
+                                    <td>{curUser.isDoctor?"Yes":"No"}</td>
+                                    <td>
+                                        <Link to={`admin/users/${curUser._id}/edit`}>Edit</Link>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => {
+                                            deleteUser(curUser._id);
+                                            setLoad(1);
+                                        }}>Delete</button>
+                                    </td>
                                 </tr>
                              })}
                         </tbody>
