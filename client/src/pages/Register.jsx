@@ -41,11 +41,10 @@ export const Register = () => {
             const res_data = await response.json();
             // console.log("response from server", res_data);
             if (response.ok) {
-                
                 // console.log(`Response from server: ${res_data}`);
                 // localStorage.setItem('regtoken',res_data.token);
                 storeToken(res_data.token);
-                setUser({ name: "", email: "", password: "", phone: ""});
+                setUser({ name: "", email: "", password: "", phone: "" });
                 toast.success("Registered Successfully");
                 navigate('/')
             } else {

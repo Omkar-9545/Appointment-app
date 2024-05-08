@@ -15,18 +15,17 @@ const home = async (req, res) => {
 const register = async (req, res) => {
 
     try {
-        //console.log(req.body);
-        const { name, email, password } = req.body;
+        const { name, email, password, phone} = req.body;
 
         const userExist = await User.findOne({ email});
         if (userExist) {
             return res.status(400).json({ message: "Email Already Exists!" ,success:false});
         }
+        const salt = await bcrypt.genSalt(10);
+        const hashed_password = await bcrypt.hash(password, salt);
+        
+        const userCreated = await User.create({ name, email, password:hashed_password, phone });
 
-        // const salt = 10
-        // const hashed_password = await bcrypt.hash(password, salt);
-
-        const userCreated = await User.create({ name, email, password});
         res.status(201).json(
             {
                 message: "Registration Successful",
@@ -52,9 +51,7 @@ const login = async(req,res) => {
         if (!userExist) {
             return res.status(404).json({ message: "Invalid Credentials!!" ,success:false});
         }
-        const salt = await bcrypt.genSalt(10);
-        const hashed_password = await bcrypt.hash(userExist.password, salt);
-        userExist.password = hashed_password;
+       
         // if exists then
         const user = await bcrypt.compare(password, userExist.password)
         if (user) {
