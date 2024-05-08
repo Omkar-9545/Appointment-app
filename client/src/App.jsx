@@ -14,6 +14,9 @@ import { Gadhinglaj } from './pages/city2-hospital';
 import { Sangli } from './pages/city3-hospital';
 import { ApplyDoctor } from './pages/applyDoctor';
 import { Notification } from './pages/Notification';
+import { AdminLayout } from './components/Layouts/Admin-Layout';
+import { AdminUsers } from './pages/Admin-Users';
+import { AdminDoctors } from './pages/Admin-doctors';
 
 
 const App = () => {
@@ -33,7 +36,11 @@ const App = () => {
           <Route path='/sangli' element={<Sangli />} />
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
           <Route path='/notification' element={<Notification/>} />
-          <Route path="/logout" element={<Logout/>} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path='/admin' element={<AdminLayout/>}>
+            <Route path='users' element={<AdminUsers/>} />
+            <Route path='doctors' element={<AdminDoctors/>} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer/>
