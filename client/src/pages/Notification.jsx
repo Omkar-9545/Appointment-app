@@ -26,6 +26,15 @@ export const Notification = () => {
         // window.location.reload()
     }
 
+    const deleteNotification = async() => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/admin/delete-notification");
+            console.log(response)
+        } catch (error) {
+            console.log(`Notfication deletion error ${error}`);
+        }
+    }
+
     useEffect(() => {
         if (load) {
             seeNotification();
@@ -56,7 +65,10 @@ export const Notification = () => {
             }
                 </p>
             </div>
-            <button className="read-button">
+                <button className="read-button" onClick={() => {
+        deleteNotification();
+        setLoad(1)
+            }}>
                     Delete all read
             </button>
             <br />
