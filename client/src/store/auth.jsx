@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
     const [service, setService] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     
     const storeToken = (serverToken) => {
         setToken(serverToken)
@@ -17,13 +18,16 @@ export const AuthProvider = ({ children }) => {
 
     const userAuthentication = async() => {
         try {
+            setIsLoading(true)
             const response = await axios.get("http://localhost:5000/api/auth/user", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             setUser(response.data.userData);
+            setIsLoading(false);
         } catch (error) {
+            setIsLoading(false);
             if (token) {
                 toast.error("Error fetching data from server")
             }
@@ -63,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, [token]);
     
-    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,service}}>
+    return <AuthContext.Provider value={{storeToken ,LogoutUser,isLoggedIn,user,service,isLoading}}>
         {children}
     </AuthContext.Provider>
 }

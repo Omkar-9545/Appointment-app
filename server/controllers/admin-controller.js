@@ -12,6 +12,18 @@ const getAllUser = async (req, res) => {
     }
 }
 
+const getAllDoc = async(req,res) => {
+    try {
+        const doctors = await User.find({ isDoctor: true },{password:0});
+        if (!doctors || doctors.length === 0) {
+            return res.status(404).json({ message: "No Doctors among the users", success: false });
+        }
+        return res.status(200).json({ data: doctors, success: true });
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getUserbyId = async (req, res) => {
     try {
         const id = req.params.id;
@@ -112,4 +124,4 @@ const deleteNotification = async(req,res) => {
     }
 }
 
-module.exports = { getAllUser, deleteUser,getNotification,seeNotification,deleteNotification,getUserbyId,updateUser};
+module.exports = { getAllUser, deleteUser,getNotification,seeNotification,deleteNotification,getUserbyId,updateUser,getAllDoc};

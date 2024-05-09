@@ -37,7 +37,7 @@ const register = async (req, res) => {
         
     } catch (err) {
         
-        res.status(500).json({ message: "Registration Page not Found" ,success:false});
+        res.status(500).json({ message: "Registration Error" ,success:false});
     }
 };
 

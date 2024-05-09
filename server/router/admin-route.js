@@ -18,6 +18,8 @@ router.route("/users/:id").get(authMiddleware, adminMiddleware, adminCtrl.getUse
 
 router.route("/users/update/:id").patch(authMiddleware,adminMiddleware,adminCtrl.updateUser)
 
-router.route("/users/delete/:id").delete(authMiddleware,adminMiddleware,adminCtrl.deleteUser)
+router.route("/users/delete/:id").delete(authMiddleware, adminMiddleware, adminCtrl.deleteUser)
+
+router.route("/doctors").get(authMiddleware, adminMiddleware, adminCtrl.getAllDoc);
 
 module.exports = router;

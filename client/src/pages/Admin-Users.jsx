@@ -71,7 +71,7 @@ export const AdminUsers = () => {
                                     <td>{curUser.phone}</td>
                                     <td>{curUser.isDoctor?"Yes":"No"}</td>
                                     <td>
-                                        <Link to={`admin/users/${curUser._id}/edit`} className="updateLink">Edit</Link>
+                                        <Link to={`${curUser._id}/edit`} className="updateLink">Edit</Link>
                                     </td>
                                     <td>
                                         <button onClick={() => {

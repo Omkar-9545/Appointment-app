@@ -17,6 +17,7 @@ import { Notification } from './pages/Notification';
 import { AdminLayout } from './components/Layouts/Admin-Layout';
 import { AdminUsers } from './pages/Admin-Users';
 import { AdminDoctors } from './pages/Admin-doctors';
+import { AdminUpdate } from './pages/Admin-Update';
 
 
 const App = () => {
@@ -38,9 +39,10 @@ const App = () => {
           <Route path='/notification' element={<Notification/>} />
           <Route path="/logout" element={<Logout />} />
           <Route path='/admin' element={<AdminLayout/>}>
-            <Route path='users' element={<AdminUsers/>} />
-            <Route path='doctors' element={<AdminDoctors/>} />
+            <Route path='users' element={<AdminUsers />}/>
+            <Route path='doctors' element={<AdminDoctors />}/>
           </Route>
+          <Route path='/admin/users/:id/edit' element={<AdminUpdate/>} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer/>

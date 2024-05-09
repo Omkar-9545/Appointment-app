@@ -400,6 +400,7 @@ body tr{
 
   &:last-child{
     box-shadow: none;
+    padding-bottom: 0px;
   }
 
 }
@@ -447,4 +448,20 @@ body tr{
       }
     }
   }
+}
+
+
+.doctor{
+  display: grid;
+  grid-template-columns: repeat(5,minmax(10rem,1fr)) !important;
+  align-items: center;
+  box-shadow: 0 0.3rem 0 grey;
+  margin-bottom: 20px;
+  border-bottom: 4px solid transparent;
+  color: var(--bg-color);
+
+  &:last-child{
+    box-shadow: none;
+  }
+
 }
