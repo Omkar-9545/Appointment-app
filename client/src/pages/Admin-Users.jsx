@@ -14,7 +14,7 @@ export const AdminUsers = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            // console.log(response.data.data);
+            // console.log(response.data);
             setUsers(response.data.data);
         } catch (error) {
             console.log(error)
@@ -29,15 +29,14 @@ export const AdminUsers = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            // console.log(response.data)
             if (response.data.success) {
-                // deleteUser();
+                setLoad(1);
             }
-
         } catch (error) {
             console.log(error)
         }
     }
+
     useEffect(() => {
         if (load) {
             getAllUsers();
@@ -59,6 +58,8 @@ export const AdminUsers = () => {
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Doctor</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                                 
                             </tr>
                         </thead>
@@ -70,12 +71,11 @@ export const AdminUsers = () => {
                                     <td>{curUser.phone}</td>
                                     <td>{curUser.isDoctor?"Yes":"No"}</td>
                                     <td>
-                                        <Link to={`admin/users/${curUser._id}/edit`}>Edit</Link>
+                                        <Link to={`admin/users/${curUser._id}/edit`} className="updateLink">Edit</Link>
                                     </td>
                                     <td>
                                         <button onClick={() => {
                                             deleteUser(curUser._id);
-                                            setLoad(1);
                                         }}>Delete</button>
                                     </td>
                                 </tr>

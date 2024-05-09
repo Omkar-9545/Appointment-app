@@ -361,8 +361,8 @@ a.active{
 
 th{
   font-size: 1.8rem;
-  letter-spacing: 0.1rem;
-  padding: 3rem;
+  letter-spacing: 0.08rem;
+  padding: 4rem;
   color: var(--dark-color);
   box-shadow: 0 0 0.3rem 0 grey;
   margin-bottom: 10px;
@@ -371,8 +371,8 @@ th{
 
 td{
   font-size: 1.7rem;
-  letter-spacing: 0.1rem;
-  padding: 3rem;
+  letter-spacing: 0.06rem;
+  padding: 1rem;
   text-align: center;
   color: var(--dark-color);
   width: 30rem;
@@ -391,7 +391,7 @@ table{
 
 body tr{
   display: grid;
-  grid-template-columns: repeat(5,minmax(10rem,1fr));
+  grid-template-columns: repeat(6,minmax(10rem,1fr));
   align-items: center;
   box-shadow: 0 0.3rem 0 grey;
   margin-bottom: 10px;

@@ -30,7 +30,7 @@ const register = async (req, res) => {
             {
                 message: "Registration Successful",
                 token: await userCreated.generateToken(),
-                userId: userCreated._id.toString(),
+                userId: userCreated._id,
                 success:true,
             }
         );
