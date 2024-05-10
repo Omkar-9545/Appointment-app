@@ -6,12 +6,12 @@ export const Navbar = () => {
 
     // const token = localStorage.getItem("token");
     // let isLoggedIn = !!token;
-    const { isLoggedIn } = useAuth();
-    const { user } = useAuth();
-    let x=0;
-    if (user) {
-        x = user.notification.length;
+    const { isLoggedIn, user, isLoading } = useAuth();
+
+    if (isLoading) {
+        return <h1>Loading ...</h1>
     }
+    
     return (
         <>
             <header>
@@ -35,7 +35,7 @@ export const Navbar = () => {
                                             <li>
                                                 <a href="/notification" class="notification">
                                                     <span><i class="fa fa-bell"></i></span>
-                                                    <span class="badge">{x}</span>
+                                                    <span class="badge">{user.notification.length}</span>
                                                 </a>
                                             </li>
                                         </ul>
