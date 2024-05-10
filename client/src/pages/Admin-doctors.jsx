@@ -21,14 +21,19 @@ export const AdminDoctors = () => {
     }
 
 
-    const deleteUser = async(id) => {
+    const approveDoc = async(id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/admin/users/delete/${id}`, {
+            const obj = { status: "approved" };
+            const response = await fetch(`http://localhost:5000/api/admin/doctors/update/${id}`, {
+                method:"PATCH",
                 headers: {
+                    "Content-Type":"application/json",
                     Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
+                },
+                body: JSON.stringify(obj),
             });
-            if (response.data.success) {
+            // console.log(response)
+            if (response.ok) {
                 setLoad(1);
             }
         } catch (error) {
@@ -69,7 +74,7 @@ export const AdminDoctors = () => {
                                     {
                                         curDoc.status === 'pending' ?
                                             <td>
-                                        <button to={`${curDoc._id}/edit`} className="updateLink">Approve</button>
+                                        <button onClick={()=>approveDoc(curDoc._id)} className="updateLink">Approve</button>
                                             </td>
                                             :
                                             <td>
