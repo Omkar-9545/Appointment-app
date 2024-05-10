@@ -92,6 +92,7 @@ const seeNotification = async(req,res) => {
         const user = await User.findOne({ _id: id });
         const notification = user.notification;
         const seenNotification = user.seenNotification
+        
         if (notification && seenNotification) {
             res.status(200).json({
                 message: "Fetched all notification succesfully", data: {
@@ -100,6 +101,7 @@ const seeNotification = async(req,res) => {
                 },success:true
             });
         }
+        
     } catch (error) {
         // console.log(error);
         res.status(400).json({message:"Error in fetching notification",error})

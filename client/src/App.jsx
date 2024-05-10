@@ -18,6 +18,7 @@ import { AdminLayout } from './components/Layouts/Admin-Layout';
 import { AdminUsers } from './pages/Admin-Users';
 import { AdminDoctors } from './pages/Admin-doctors';
 import { AdminUpdate } from './pages/Admin-Update';
+import { Profile } from './pages/Profile';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path="/services" element={<Service />} />
           <Route path="/kolhapur" element={<Kolhapur />} />
           <Route path='/gadhinglaj' element={<Gadhinglaj />} />

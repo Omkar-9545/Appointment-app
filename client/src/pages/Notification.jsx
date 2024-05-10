@@ -3,18 +3,23 @@ import axios from "axios";
 import { useAuth } from './../store/auth';
 
 export const Notification = () => {
-    const [Data, setData] = useState({
-        read: [],
-        unread: [],
-    });
 
-    const [load, setLoad] = useState(1);
     const { user, isLoading } = useAuth();
     if (isLoading) {
         return <h1>Loading ...</h1>
     }
     const id = user._id
+    const [Data, setData] = useState({
+        read: [],
+        unread: [],
+    });
 
+    
+    const [load, setLoad] = useState(1);
+    
+   
+    
+    
     const seeNotification = async() => {
         try {
             const response = await axios.get(`http://localhost:5000/api/admin/get-notification/${id}`)
