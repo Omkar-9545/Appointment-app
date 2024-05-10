@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 export const AdminDoctors = () => {
 
@@ -14,6 +13,7 @@ export const AdminDoctors = () => {
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
             })
+            // console.log(response.data)
             setDoctors(response.data.data);
         } catch (error) {
             console.log(error)
@@ -54,27 +54,28 @@ export const AdminDoctors = () => {
                         <thead>
                             <tr className="doctor">
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Status</th>
+                                 <th>Phone</th>
+                                <th>Actions</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             {doctors.map((curDoc,index) => {
-                                return <tr key={index}>
-                                    <td>{curDoc.name}</td>
-                                    <td>{curDoc.email}</td>
+                                return <tr key={index} className="doc-tr">
+                                    <td>{curDoc.firstName} {curDoc.lastName}</td>
+                                    <td>{curDoc.status}</td>
                                     <td>{curDoc.phone}</td>
-                                    <td>
-                                        <Link to={`${curDoc._id}/edit`} className="updateLink">Edit</Link>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => {
-                                            deleteUser(curDoc._id);
-                                        }}>Delete</button>
-                                    </td>
+                                    {
+                                        curDoc.status === 'pending' ?
+                                            <td>
+                                        <button to={`${curDoc._id}/edit`} className="updateLink">Approve</button>
+                                            </td>
+                                            :
+                                            <td>
+                                        <button onClick={() => {deleteUser(curDoc._id);}}>Reject</button>
+                                            </td>
+                                    }
                                 </tr>
                              })}
                         </tbody>

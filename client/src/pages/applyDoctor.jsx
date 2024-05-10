@@ -7,7 +7,10 @@ export const ApplyDoctor = () => {
 
     const navigate = useNavigate();
     const { isLoggedIn } = useAuth();
+    const { user } = useAuth();
 
+    const id = user._id;
+    // console.log(userId)
     const [doctor, setDoctor] = useState({
         firstName: "",
         lastName:"",
@@ -31,7 +34,7 @@ export const ApplyDoctor = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-        const response = await fetch("http://localhost:5000/api/hospital/apply-doctor", {
+        const response = await fetch(`http://localhost:5000/api/hospital/apply-doctor/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json",

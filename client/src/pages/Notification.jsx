@@ -19,18 +19,20 @@ export const Notification = () => {
 
     const getNotification = async() => {
         try {
-            await axios.get("http://localhost:5000/api/admin/notification")
+            const response = await axios.get("http://localhost:5000/api/admin/notification")
+            if(response.data.success){
+                setLoad(1);
+            }
         } catch (error) {
             console.log(`Notification getting frontend error ${error}`);
         }
-        // window.location.reload()
     }
 
     const deleteNotification = async() => {
         try {
             const response = await axios.get("http://localhost:5000/api/admin/delete-notification");
             if(response.data.success){
-                deleteNotification();
+                setLoad(1);
             }
         } catch (error) {
             console.log(`Notfication deletion error ${error}`);
@@ -69,7 +71,7 @@ export const Notification = () => {
             </div>
                 <button className="read-button" onClick={() => {
         deleteNotification();
-        setLoad(1)
+        
             }}>
                     Delete all read
             </button>

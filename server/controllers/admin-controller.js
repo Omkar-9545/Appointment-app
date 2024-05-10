@@ -1,4 +1,5 @@
 const User = require("../models/user-model");
+const Doctor = require("../models/doctor-model");
 
 const getAllUser = async (req, res) => {
     try {
@@ -14,7 +15,7 @@ const getAllUser = async (req, res) => {
 
 const getAllDoc = async(req,res) => {
     try {
-        const doctors = await User.find({ isDoctor: true },{password:0});
+        const doctors = await Doctor.find({},{password:0});
         if (!doctors || doctors.length === 0) {
             return res.status(404).json({ message: "No Doctors among the users", success: false });
         }
@@ -124,4 +125,27 @@ const deleteNotification = async(req,res) => {
     }
 }
 
-module.exports = { getAllUser, deleteUser,getNotification,seeNotification,deleteNotification,getUserbyId,updateUser,getAllDoc};
+const approveDoc = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const status = req.body.status;
+        const doc = await Doctor.findByIdAndUpdate(id, { status });
+        const user = await User.findOne({ _id: doc.userId });
+        const notification = user.notification;
+        console.log(notification)
+        notification.push({
+            type: "doctor-account-request-updated",
+            message: `Your doctor account is ${status}`,
+            onClickPath: "/notification"
+        });
+        // console.log(notification)
+        if (status === 'approved') {
+            await User.findByIdAndUpdate(doc.userId, { isDoctor: true ,notification});
+        }
+        res.status(200).json({ success: true, message: "Account status updated successfully." });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = { getAllUser, deleteUser,getNotification,seeNotification,deleteNotification,getUserbyId,updateUser,getAllDoc,approveDoc};

@@ -21,7 +21,7 @@ const docSchema = mongoose.Schema({
         require:[true,'email is required']
     },
     status: {
-        type: String,
+        type: String ,
         default: "pending"
     },
     specialization: {

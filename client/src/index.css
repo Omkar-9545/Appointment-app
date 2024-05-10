@@ -364,7 +364,7 @@ th{
   letter-spacing: 0.08rem;
   padding: 4rem;
   color: var(--dark-color);
-  box-shadow: 0 0 0.3rem 0 grey;
+  box-shadow: 0 0 0.2rem 0 grey;
   margin-bottom: 10px;
   text-transform: capitalize;
 }
@@ -453,7 +453,7 @@ body tr{
 
 .doctor{
   display: grid;
-  grid-template-columns: repeat(5,minmax(10rem,1fr)) !important;
+  grid-template-columns: repeat(4,minmax(2rem,1fr)) !important;
   align-items: center;
   box-shadow: 0 0.3rem 0 grey;
   margin-bottom: 20px;
@@ -462,6 +462,23 @@ body tr{
 
   &:last-child{
     box-shadow: none;
+  }
+
+}
+
+.doc-tr{
+  display: grid;
+  grid-template-columns: repeat(4,minmax(10rem,1fr));
+  align-items: center;
+  box-shadow: 0 0.3rem 0 grey;
+  margin-bottom: 10px;
+  border-bottom: 4px solid transparent;
+  color: var(--bg-color);
+
+  &:last-child{
+    display: flex;
+    box-shadow: none;
+    margin-bottom: 12px;
   }
 
 }

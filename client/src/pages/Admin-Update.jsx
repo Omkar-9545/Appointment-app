@@ -112,13 +112,13 @@ export const AdminUpdate = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="isDoctor">Is a Doctor</label>
+                            <label htmlFor="isDoctor">Is an Admin</label>
                             <input
                                 type="text"
-                                name="isDoctor"
-                                id="isDoctor"
+                                name="isAdmin"
+                                id="isAdmin"
                                 autoComplete="off"
-                                value={data.isDoctor}
+                                value={data.isAdmin}
                                 onChange={handleInput}
                                 required
                             />
