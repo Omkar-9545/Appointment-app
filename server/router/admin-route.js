@@ -6,11 +6,11 @@ const router = express.Router();
 
 
 //to get all notification from the database
-router.route("/notification").get(adminCtrl.getNotification);
+router.route("/notification/:id").get(adminCtrl.getNotification);
 
-router.route("/get-notification").get(adminCtrl.seeNotification);
+router.route("/get-notification/:id").get(adminCtrl.seeNotification);
 
-router.route("/delete-notification").get(adminCtrl.deleteNotification)
+router.route("/delete-notification/:id").get(adminCtrl.deleteNotification)
 
 router.route('/users').get(authMiddleware, adminMiddleware, adminCtrl.getAllUser)
 

@@ -65,13 +65,13 @@ const deleteUser = async(req,res) => {
 //push all notification into seenNotification
 const getNotification = async(req,res) => {
     try {
-        const user = await User.findOne({ isAdmin: true});
+        const id = req.params.id
+        const user = await User.findOne({ _id: id });
         const seenNotification = user.seenNotification;
         const notification = user.notification;
-        const userId = user._id;
             seenNotification.push(...notification);
             user.notification.length = 0;
-        const updatedUser = await User.findByIdAndUpdate(userId, { notification, seenNotification }).select({ password: 0 });
+        const updatedUser = await User.findByIdAndUpdate(id, { notification, seenNotification }).select({ password: 0 });
             res.status(200).json({
                 message: "Pushed all notification successfully",
                 data: {
@@ -88,7 +88,8 @@ const getNotification = async(req,res) => {
 
 const seeNotification = async(req,res) => {
     try {
-        const user = await User.findOne({ isAdmin: true });
+        const id = req.params.id
+        const user = await User.findOne({ _id: id });
         const notification = user.notification;
         const seenNotification = user.seenNotification
         if (notification && seenNotification) {
@@ -107,13 +108,12 @@ const seeNotification = async(req,res) => {
 
 const deleteNotification = async(req,res) => {
     try {
-        const admin = await User.findOne({ isAdmin: true });
-        const userId = admin._id;
-        const seenNotification = admin.seenNotification
-        
+        const id = req.params.id
+        const user = await User.findOne({ _id: id });
+        const seenNotification = user.seenNotification
         seenNotification.length = 0;
         // console.log(seenNotification)
-        const updatedUser = await User.findByIdAndUpdate(userId, { seenNotification }).select({ password: 0 });
+        const updatedUser = await User.findByIdAndUpdate(id, { seenNotification }).select({ password: 0 });
         res.status(201).json({
             message: "Deleted all notification successfully", data: {
                 read: updatedUser.seenNotification,

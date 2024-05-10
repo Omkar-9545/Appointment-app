@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from './../store/auth';
 
 export const Notification = () => {
     const [Data, setData] = useState({
         read: [],
         unread: [],
     });
+
     const [load, setLoad] = useState(1);
+    const { user, isLoading } = useAuth();
+    if (isLoading) {
+        return <h1>Loading ...</h1>
+    }
+    const id = user._id
 
     const seeNotification = async() => {
         try {
-            const response = await axios.get("http://localhost:5000/api/admin/get-notification")
+            const response = await axios.get(`http://localhost:5000/api/admin/get-notification/${id}`)
             setData(response.data.data)
         } catch (error) {
             console.log(`Notification getting frontend error ${error}`);
@@ -19,7 +26,7 @@ export const Notification = () => {
 
     const getNotification = async() => {
         try {
-            const response = await axios.get("http://localhost:5000/api/admin/notification")
+            const response = await axios.get(`http://localhost:5000/api/admin/notification/${id}`)
             if(response.data.success){
                 setLoad(1);
             }
@@ -30,7 +37,7 @@ export const Notification = () => {
 
     const deleteNotification = async() => {
         try {
-            const response = await axios.get("http://localhost:5000/api/admin/delete-notification");
+            const response = await axios.get(`http://localhost:5000/api/admin/delete-notification/${id}`);
             if(response.data.success){
                 setLoad(1);
             }
