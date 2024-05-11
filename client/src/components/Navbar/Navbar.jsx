@@ -8,10 +8,6 @@ export const Navbar = () => {
     // let isLoggedIn = !!token;
     const { isLoggedIn, user, isLoading } = useAuth();
 
-    if (isLoading) {
-        return <h1>Loading ...</h1>
-    }
-    
     return (
         <>
             <header>
@@ -25,9 +21,9 @@ export const Navbar = () => {
                                 <NavLink to="/">Home</NavLink>
                             </li>
                             <li>
-                                {isLoggedIn
+                                {isLoggedIn && !isLoading
                                     ?
-                                    <>
+                                    
                                         <ul>
                                             <li><NavLink to="/profile">{user.name}</NavLink></li>
                                             <li ><NavLink to="/services">Hospitals</NavLink> </li>
@@ -39,7 +35,6 @@ export const Navbar = () => {
                                                 </a>
                                             </li>
                                         </ul>
-                                    </>
                                     :
                                     <>
                                     <ul>
