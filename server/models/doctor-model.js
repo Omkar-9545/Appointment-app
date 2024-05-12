@@ -32,8 +32,13 @@ const docSchema = mongoose.Schema({
         type: Number,
         require:[true,'experience is required']
     },
-    timings: {
-        type: Array
+    startTime: {
+        type: String,
+        require: [true,'start time is required']
+    },
+    endTime: {
+        type: String,
+        require:[true,'end time is required']
     }
 }, { timestamps: true });
 

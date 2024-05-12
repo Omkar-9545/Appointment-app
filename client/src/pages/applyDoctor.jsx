@@ -18,13 +18,15 @@ export const ApplyDoctor = () => {
         email: "",
         status: "pending",
         specialization: "",
-        experience:""
+        experience: "",
+        startTime: "",
+        endTime:""
     });
 
     const handleInput = (e) => {
         let name = e.target.name;
         let value = e.target.value;
-
+     
         setDoctor({
             ...doctor,
             [name]: value,
@@ -43,7 +45,7 @@ export const ApplyDoctor = () => {
         });
             const res_data = await response.json();
             if (res_data.success) {
-                setDoctor({ firstName: "",lastName:"", phone: "", email: "",specialization:"",experience:""});
+                setDoctor({ firstName: "", lastName: "", phone: "", email: "", specialization: "", experience: "", startTime: "", endTime: "" });
                 toast.success("Application Successful");
                 navigate('/')
             } else {
@@ -55,6 +57,8 @@ export const ApplyDoctor = () => {
            
         }
     }
+     
+
     if (isLoggedIn) {
         return (
             <>
@@ -147,6 +151,29 @@ export const ApplyDoctor = () => {
                                                 onChange={handleInput}
                                             />
                                         </div>
+                                         <div>
+                                                <label htmlFor="startTime" >From:</label>
+                                                <input
+                                                    type="time"
+                                                    name="startTime"
+                                                    id="user-startTime"
+                                                    value={doctor.startTime}
+                                                    onChange={handleInput}
+                                                    required />
+                                            </div>
+                                            
+                                        <div>
+                                                <label for="endTime" >To:</label>
+                                                <input
+                                                    type="time"
+                                                    name="endTime"
+                                                    id="user-endTime"
+                                                    value={doctor.endTime}
+                                                    onChange={handleInput}
+                                                    required
+                                                />
+                                            </div>
+                                        
                                         <br />
                                         <button type="submit" className="btn btn-submit">Apply</button>
                                     </form>

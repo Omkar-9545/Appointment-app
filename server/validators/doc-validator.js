@@ -25,7 +25,10 @@ const docSchema = z.object({
     experience: z
         .string({ required_error: "Experience is Required!" })
         .trim().min(1, { message: "Experience must be of 1 digits atleast" }).max(3,{message:"Experience cannot be more than 3 digits"}),
-    
+    startTime: z
+        .string({ required_error: "Start time is Required!" }),
+    endTime : z
+        .string({ required_error: "end time is Required!" })
 });
 
 module.exports = docSchema;

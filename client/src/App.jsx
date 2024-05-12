@@ -20,7 +20,6 @@ import { AdminDoctors } from './pages/Admin-doctors';
 import { AdminUpdate } from './pages/Admin-Update';
 import { Profile } from './pages/Profile';
 
-
 const App = () => {
   return (
     <>
