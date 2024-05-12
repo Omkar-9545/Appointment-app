@@ -19,6 +19,7 @@ import { AdminUsers } from './pages/Admin-Users';
 import { AdminDoctors } from './pages/Admin-doctors';
 import { AdminUpdate } from './pages/Admin-Update';
 import { Profile } from './pages/Profile';
+import { KolhapurDoc } from './pages/city1-doctors';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/profile' element={<Profile/>} />
           <Route path="/services" element={<Service />} />
           <Route path="/kolhapur" element={<Kolhapur />} />
+          <Route path='/kolhapur/:id/doctors' element={<KolhapurDoc/>} />
           <Route path='/gadhinglaj' element={<Gadhinglaj />} />
           <Route path='/sangli' element={<Sangli />} />
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
