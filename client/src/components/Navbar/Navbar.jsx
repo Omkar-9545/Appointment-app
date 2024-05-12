@@ -17,11 +17,14 @@ export const Navbar = () => {
                     </div>
                     <nav>
                         <ul>
+                            <li>
+                            { isLoggedIn && !isLoading && user.isAdmin ? <NavLink to="/admin">Admin menu</NavLink>:""}
+                            </li>
                             <li >
                                 <NavLink to="/">Home</NavLink>
                             </li>
                             <li>
-                                {isLoggedIn && !isLoading
+                                {isLoggedIn && !isLoading 
                                     ?
                                     
                                         <ul>
