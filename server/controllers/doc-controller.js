@@ -67,4 +67,17 @@ const docController = async(req,res) => {
     }
 }
 
-module.exports =  docController;
+const docProfile = async(req,res) => {
+    try {
+        const id = req.params.id
+        const response = await Doctor.findOne({ userId: id });
+        if (!response) {
+            return res.status(404).json({ message: "No such doctor found", success: false });
+        }
+        return res.status(200).json({ message: "Fetched doctor data successfully", success: true, data: response });
+    } catch (error) {
+        res.status(500).json({ message: "Error getting doc profile", error, success: false });
+    }
+}
+
+module.exports = { docController, docProfile };
