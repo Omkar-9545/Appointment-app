@@ -38,21 +38,19 @@ export const GadhinglajDoc = () => {
                     {doctors.length ?
                             doctors.map((curElem, index) => {
 
-                            // const { name, address, phone } = curElem;
+                                const { firstName, lastName, specialization, experience, startTime, endTime } = curElem;
                                      
                             return (
                                 <><div className="card" key={index}>
-                                    <div className="card-link">
-                                        {/* <NavLink to={`/kolhapur/${curElem._id}/doctors`}> */}
-                                        {/* </NavLink> */}
-                                    </div>
-                                    <div className="card-details">
-                                        {/* <h2>{name}</h2>
-                                        <p>Address: {address}</p>
-                                        <p>Phone: {phone}</p> */}
-                                        <p>{curElem}</p>
-                                    </div>
-                                </div>
+                                {/* <NavLink to={`/kolhapur/${curElem._id}/doctors`}> */}
+                                {/* </NavLink> */}
+                            <div className="card-details">
+                                <h2>Dr. {firstName} {lastName}</h2>
+                                <p>Specialization: {specialization}</p>
+                                <p>Experience: {experience} yrs</p>
+                                <p>Time : {startTime}am to {endTime}pm</p>
+                            </div>
+                        </div>
                                 </>
                    
                             );
