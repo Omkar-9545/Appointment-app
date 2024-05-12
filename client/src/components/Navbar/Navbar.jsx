@@ -20,6 +20,9 @@ export const Navbar = () => {
                             <li>
                             { isLoggedIn && !isLoading && user.isAdmin ? <NavLink to="/admin">Admin menu</NavLink>:""}
                             </li>
+                            <li>
+                                {isLoggedIn && !isLoading && !user.isAdmin && user.isDoctor ? <NavLink to={`/${user._id}/doc/profile`}>Doctor Profile</NavLink>:""}
+                            </li>
                             <li >
                                 <NavLink to="/">Home</NavLink>
                             </li>

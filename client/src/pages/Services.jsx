@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const Service = () => {
     const { service } = useAuth();
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, isLoading, user } = useAuth();
     if (isLoggedIn) {
         return (
             <>
@@ -62,10 +62,10 @@ export const Service = () => {
                             }
                         })}
                     </div>
-                    <div className="apply-doc">
+                    {!user.isDoctor && !isLoading ?<div className="apply-doc">
                         <p>Are you a doctor? Get your account and start serving here :</p>
                         <NavLink className="link-doc" to="/apply-doctor">click here</NavLink>
-                    </div>
+                    </div> :""}
                 </section>
             </>
         )
