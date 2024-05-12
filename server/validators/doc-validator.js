@@ -28,7 +28,15 @@ const docSchema = z.object({
     startTime: z
         .string({ required_error: "Start time is Required!" }),
     endTime : z
-        .string({ required_error: "end time is Required!" })
+        .string({ required_error: "end time is Required!" }),
+    city: z
+        .string({ required_error: "City name is Required!" })
+        .trim().min(3, { message: "City name must be atleast of 3 characters" })
+        .max(155, { message: "City name must not be more than 155 characters" }),
+    hospital: z
+        .string({ required_error: "Hospital name is Required!" })
+        .trim().min(3, { message: "Hospital name must be atleast of 3 characters" })
+        .max(155, { message: "Hospital name must not be more than 155 characters" }),
 });
 
 module.exports = docSchema;

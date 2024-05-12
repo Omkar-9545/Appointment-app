@@ -52,39 +52,42 @@ export const AdminDoctors = () => {
             
             <section className="admin-users-setion">
                 <div className="container">
-                    <h1>All Doctors</h1>
+                    <h1>All Doctors:</h1>
                 </div>
-                <div className="container admin-users">
-                    <table>
-                        <thead>
-                            <tr className="doctor">
-                                <th>Name</th>
-                                <th>Status</th>
-                                 <th>Phone</th>
-                                <th>Actions</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {doctors.map((curDoc,index) => {
-                                return <tr key={index} className="doc-tr">
-                                    <td>{curDoc.firstName} {curDoc.lastName}</td>
-                                    <td>{curDoc.status}</td>
-                                    <td>{curDoc.phone}</td>
-                                    {
-                                        curDoc.status === 'pending' ?
-                                            <td>
-                                        <button onClick={()=>approveDoc(curDoc._id)} className="updateLink">Approve</button>
-                                            </td>
-                                            :
-                                            <td>
-                                        <button onClick={() => {deleteUser(curDoc._id);}}>Reject</button>
-                                            </td>
-                                    }
-                                </tr>
-                             })}
-                        </tbody>
-                    </table>
+            <div className="container admin-users">
+                {doctors.length ? 
+                <table>
+                <thead>
+                    <tr className="doctor">
+                        <th>Name</th>
+                        <th>Status</th>
+                         <th>Phone</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {doctors.map((curDoc,index) => {
+                        return <tr key={index} className="doc-tr">
+                            <td>{curDoc.firstName} {curDoc.lastName}</td>
+                            <td>{curDoc.status}</td>
+                            <td>{curDoc.phone}</td>
+                            {
+                                curDoc.status === 'pending' ?
+                                    <td>
+                                <button onClick={()=>approveDoc(curDoc._id)} className="updateLink">Approve</button>
+                                    </td>
+                                    :
+                                    <td>
+                                <button onClick={() => {deleteUser(curDoc._id);}}>Reject</button>
+                                    </td>
+                            }
+                        </tr>
+                     })}
+                </tbody>
+                </table>
+                :                    
+                    <p>No Doctors Present!</p>}
                 </div>
             </section>
     </>

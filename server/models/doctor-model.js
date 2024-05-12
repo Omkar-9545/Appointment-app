@@ -39,6 +39,14 @@ const docSchema = mongoose.Schema({
     endTime: {
         type: String,
         require:[true,'end time is required']
+    },
+    city: {
+        type: String,
+        require:[true,'city name is required']
+    },
+    hospital: {
+        type: String,
+        require:[true,'hospital name is required']
     }
 }, { timestamps: true });
 
