@@ -28,13 +28,13 @@ const docController = async(req,res) => {
             }
         }
         else if (city.toLowerCase() == 'gadhinglaj') {
-            const l2 = await Sanhospital.findOne({ name: hospital }, { phone: 1 });
+            const l2 = await Gadhospital.findOne({ name: hospital }, { phone: 1 });
             if (!l2) {
                 return res.status(404).json({ message: "No such hospital exists", success: false });
             }
         }
         else if(city.toLowerCase() == 'sangli'){
-                const l3 = await Gadhospital.findOne({ name: hospital }, { phone: 1 });
+                const l3 = await Sanhospital.findOne({ name: hospital }, { phone: 1 });
                 if (!l3) {
                     return res.status(404).json({ message: "No such hospital exists", success: false });
                 }

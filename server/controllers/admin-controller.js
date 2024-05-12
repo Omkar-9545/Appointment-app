@@ -1,5 +1,8 @@
 const User = require("../models/user-model");
 const Doctor = require("../models/doctor-model");
+const Kolhospital = require("../models/hospitals1-model");
+const Gadhospital = require("../models/hospitals2-model");
+const Sanhospital = require("../models/hospitals3-model");
 
 const getAllUser = async (req, res) => {
     try {
@@ -132,9 +135,30 @@ const approveDoc = async(req,res) => {
         const id = req.params.id;
         const status = req.body.status;
         const doc = await Doctor.findByIdAndUpdate(id, { status });
+        const city = doc.city;
+        if (city.toLowerCase() == 'kolhapur') {
+            const qry = await Kolhospital.findOne({ name: doc.hospital }, { doctors: 1 });
+            const arr = qry.doctors;
+            const id = qry._id;
+            arr.push(doc)
+            await Kolhospital.findByIdAndUpdate(id, { doctors: arr });
+        }
+        else if (city.toLowerCase() == 'gadhinglaj') {
+            const qry1 = await Gadhospital.findOne({ name: doc.hospital }, { doctors: 1 });
+            const arr = qry1.doctors;
+            const id = qry1._id;
+            arr.push(doc)
+            await Gadhospital.findByIdAndUpdate(id, { doctors: arr });
+        }
+        else if (city.toLowerCase() == 'sangli') {
+            const qry2 = await Sanhospital.findOne({ name: doc.hospital }, { doctors: 1 });
+            const arr = qry2.doctors;
+            const id = qry2._id;
+            arr.push(doc)
+            await Sanhospital.findByIdAndUpdate(id, { doctors: arr });
+        }
         const user = await User.findOne({ _id: doc.userId });
         const notification = user.notification;
-        console.log(notification)
         notification.push({
             type: "doctor-account-request-updated",
             message: `Your doctor account is ${status}`,
