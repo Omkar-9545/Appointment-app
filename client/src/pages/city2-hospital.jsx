@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export const Gadhinglaj = () => {
     const [hospital2, setHospital2] = useState([]);
@@ -40,9 +41,9 @@ export const Gadhinglaj = () => {
                                         
                                             <div className="card" key={index}>
                                             <div className="card-img">
-                                            {/* <a href="/login"> */}
+                                            <NavLink to={`/gadhinglaj/${curElem._id}/doctors`}>
                                             <img src="./images/fortis.jpg" width="300" />
-                                            {/* </a> */}
+                                            </NavLink>
                                             </div>
                                         <div className="card-details">
                                         <h2>{name}</h2>

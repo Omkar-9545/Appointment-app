@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 export const Sangli = () => {
     const [hospital3, setHospital3] = useState([]);
@@ -38,9 +39,9 @@ const { name, address, phone } = curElem;
 return (
     <><div className="card" key={index}>
         <div className="card-img">
-            {/* <a href="/login"> */}
+        <NavLink to={`/sangli/${curElem._id}/doctors`}>
             <img src="./images/multi.jpg" width="300" />
-            {/* </a> */}
+        </NavLink>
         </div>
         <div className="card-details">
             <h2>{name}</h2>
