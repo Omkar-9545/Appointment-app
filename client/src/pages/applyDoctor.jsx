@@ -20,7 +20,9 @@ export const ApplyDoctor = () => {
         specialization: "",
         experience: "",
         startTime: "",
-        endTime:""
+        endTime: "",
+        city: "",
+        hospital:"",
     });
 
     const handleInput = (e) => {
@@ -45,7 +47,7 @@ export const ApplyDoctor = () => {
         });
             const res_data = await response.json();
             if (res_data.success) {
-                setDoctor({ firstName: "", lastName: "", phone: "", email: "", specialization: "", experience: "", startTime: "", endTime: "" });
+                setDoctor({ firstName: "", lastName: "", phone: "", email: "", specialization: "", experience: "", startTime: "", endTime: "", city: "", hospital: "" });
                 toast.success("Application Successful");
                 navigate('/')
             } else {
@@ -66,9 +68,7 @@ export const ApplyDoctor = () => {
                     <main>
                         <div className="section-registration">
                             <div className="container grid grid-two-cols">
-                                <div className="reg-image">
-                                    <img src="/images/registrationpage.jpg" alt="doctor image on registration form" width="600" height="550" />
-                                </div>
+                                
                                 <div className="registration-form">
                                     <h1 className="main-heading mb-3">Doctor Form</h1>
                                     <br />
@@ -173,7 +173,32 @@ export const ApplyDoctor = () => {
                                                     required
                                                 />
                                             </div>
-                                        
+                                        <div>
+                                            <label htmlFor="city">City</label>
+                                            <input
+                                                type="text"
+                                                name="city"
+                                                id="user-city"
+                                                placeholder="city"
+                                                autoComplete="off"
+                                                required
+                                                value={doctor.city}
+                                                onChange={handleInput}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="hospital">Hospital Name</label>
+                                            <input
+                                                type="text"
+                                                name="hospital"
+                                                id="user-hospital"
+                                                placeholder="Hospital name"
+                                                autoComplete="off"
+                                                required
+                                                value={doctor.hospital}
+                                                onChange={handleInput}
+                                            />
+                                        </div>
                                         <br />
                                         <button type="submit" className="btn btn-submit">Apply</button>
                                     </form>
