@@ -22,6 +22,6 @@ router.route("/users/delete/:id").delete(authMiddleware, adminMiddleware, adminC
 
 router.route("/doctors").get(authMiddleware, adminMiddleware, adminCtrl.getAllDoc);
 
-router.route("/doctors/update/:id").patch(authMiddleware,adminMiddleware,adminCtrl.approveDoc)
+router.route("/doctors/approve/:id").patch(authMiddleware,adminMiddleware,adminCtrl.approveDoc)
 
 module.exports = router;

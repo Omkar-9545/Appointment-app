@@ -24,7 +24,7 @@ export const AdminDoctors = () => {
     const approveDoc = async(id) => {
         try {
             const obj = { status: "approved" };
-            const response = await fetch(`http://localhost:5000/api/admin/doctors/update/${id}`, {
+            const response = await fetch(`http://localhost:5000/api/admin/doctors/approve/${id}`, {
                 method:"PATCH",
                 headers: {
                     "Content-Type":"application/json",
