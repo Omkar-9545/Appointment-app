@@ -80,4 +80,83 @@ const docProfile = async(req,res) => {
     }
 }
 
-module.exports = { docController, docProfile };
+const updateProfile = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const existData = await Doctor.findOne({ userId: id }, {});
+        if (data.city || data.hospital) {
+            if (data.city && !data.hospital) {
+                ct = data.city.toLowerCase();
+                hospital = existData.hospital;
+            }
+            else if (!data.city && data.hospital) {
+                ct = existData.city.toLowerCase();
+                hospital = data.hospital;
+            }
+            else {
+                ct = data.city.toLowerCase();
+                hospital = data.hospital;
+            }
+        // checking the validity of the cities and the hospitals if entered
+        if (ct != 'kolhapur') {
+                if (ct.toLowerCase() != 'gadhinglaj') {
+                    if (ct != 'sangli') {
+                        return res.status(404).json({ message: "City not found", success: false });
+                    }
+                }
+            }
+
+        if (ct == 'kolhapur'){
+            const l1 = await Kolhospital.findOne({ name: hospital }, {});
+            if (!l1) {
+                return res.status(404).json({ message: "No such hospital exists", success: false });
+            }
+            const updatedDoc = await Doctor.findOneAndUpdate({ userId : id }, {
+                $set: data,
+            });
+            let arr = l1.doctors
+            arr.push(updatedDoc)
+            await Kolhospital.findOneAndUpdate({ name: hospital }, { doctors: arr });
+            return res.status(201).json({ message: "Updated  doctor profile successfully ", success: true, data: updatedDoc });
+        }
+        else if (ct == 'gadhinglaj') {
+            const l2 = await Gadhospital.findOne({ name: hospital }, {});
+            if (!l2) {
+                return res.status(404).json({ message: "No such hospital exists", success: false });
+            }
+            const updatedDoc = await Doctor.findOneAndUpdate({ userId : id }, {
+                $set: data,
+            });
+            let arr = l2.doctors
+            arr.push(updatedDoc)
+            await Gadhospital.findOneAndUpdate({ name: hospital }, { doctors: arr });
+            return res.status(201).json({ message: "Updated  doctor profile successfully ", success: true, data: updatedDoc });
+        }
+        else if(ct == 'sangli'){
+                const l3 = await Sanhospital.findOne({ name: hospital }, {});
+                if (!l3) {
+                    return res.status(404).json({ message: "No such hospital exists", success: false });
+            }
+            const updatedDoc = await Doctor.findOneAndUpdate({ userId : id }, {
+                $set: data,
+            });
+            let arr = l3.doctors
+            arr.push(updatedDoc)
+            await Sanhospital.findOneAndUpdate({ name: hospital }, { doctors: arr });
+            return res.status(201).json({ message: "Updated  doctor profile successfully ", success: true, data: updatedDoc });
+        }
+
+        } else {
+            const updatedDoc = await Doctor.findOneAndUpdate({ userId : id }, {
+                $set: data,
+            });
+            return res.status(201).json({ message: "Updated  doctor profile successfully ", success: true, data: updatedDoc });
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: "Error while updating doc profile", success: false, error });
+    }
+}
+
+module.exports = { docController, docProfile, updateProfile };

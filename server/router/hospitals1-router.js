@@ -22,6 +22,8 @@ router.route("/gadhinglaj/:id/doctors").get(authMiddleware, h2.getallDoc2);
 
 router.route("/sangli/:id/doctors").get(authMiddleware, h3.getallDoc3);
 
-router.route("/:id/doc/profile").get(authMiddleware,docContrl.docProfile)
+router.route("/:id/doc/profile").get(authMiddleware, docContrl.docProfile)
+
+router.route("/:id/doc/profile/update").patch(authMiddleware,docContrl.updateProfile)
 
 module.exports = router;

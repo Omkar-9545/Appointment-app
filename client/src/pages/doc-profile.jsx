@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth"
+import { toast } from "react-toastify";
 
 export const DocProfile = () => {
 
@@ -8,7 +9,6 @@ export const DocProfile = () => {
         return <h1>Loading ...</h1>
     }
     const [doctor, setDoctor] = useState({});
-
     const docProfile = async () => {
         try {
             const response = await fetch(`http://localhost:5000/api/hospital/${user._id}/doc/profile`, {
@@ -40,30 +40,27 @@ export const DocProfile = () => {
         });
     }
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await fetch(`http://localhost:5000/api/hospital/apply-doctor/${id}`, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(doctor),
-    //         });
-    //         const res_data = await response.json();
-    //         if (res_data.success) {
-    //             setDoctor({ firstName: "", lastName: "", phone: "", email: "", specialization: "", experience: "", startTime: "", endTime: "", city: "", hospital: "" });
-    //             toast.success("Application Successful");
-    //             navigate('/')
-    //         } else {
-    //             toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
-    //         }
-    //     } catch (error) {
-    //         // next(error);
-    //         return response.status(400).send({ message: "Application for the account failed!", error });
-           
-    //     }
-    // }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:5000/api/hospital/${user._id}/doc/profile/update`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify(doctor),
+            });
+            const res_data = await response.json();
+            if (res_data.success) {
+                toast.success("updated Successfully");
+            } else {
+                toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+            }
+        } catch (error) {
+            toast.error("Something went wrong")
+        }
+    }
      
 
     
@@ -77,7 +74,7 @@ export const DocProfile = () => {
                                 <div className="registration-form">
                                     <h1 className="main-heading mb-3">Doctor Form</h1>
                                     <br />
-                                    <form >
+                                    <form onSubmit={handleSubmit}>
                                         <div>
                                             <label htmlFor="name">FirstName</label>
                                             <input
