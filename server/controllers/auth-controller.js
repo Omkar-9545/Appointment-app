@@ -1,10 +1,11 @@
 const User = require("../models/user-model")
 const bcrypt = require("bcryptjs");
+const appointmentModel = require("../models/appointment-model");
 // HOME LOGIC //
 
 const home = async (req, res) => {
     try {
-        res.status(200).send({ message: `Welcome to the home page of application by Omki using controller` });
+        res.status(200).send({ message: `Welcome to the home page of application by Omki` });
     } catch (error) {
         console.log(error);
     }
@@ -89,4 +90,23 @@ const authctrl = async(req,res) => {
     }
 }
 
-module.exports = { home, register, login,authctrl };
+const bookCtrl = async(req,res) => {
+    try {
+        req.body.status = 'pending';
+        const newAppointment = await appointmentModel.create(req.body);
+        const user = await User.findOne({ _id: req.body.userId });
+        const notification = user.notification
+        notification.push({
+            type: 'New-Appointment-request',
+            message: `A new appointment request from ${req.body.userInfo.name}`,
+            onClickPath: "/user/appointments"
+        });
+        const newUser = await User.findByIdAndUpdate(req.body.userId, { notification }).select({ password: 0 });
+        res.status(201).json({ message: "Appointment sucessful", success: true,data:newUser});
+
+    } catch (error) {
+        res.status(500).json({ message: "Error while booking appointment", success: false, error });
+    }
+}
+
+module.exports = { home, register, login, authctrl, bookCtrl };

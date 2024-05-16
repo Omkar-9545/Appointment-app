@@ -17,4 +17,6 @@ router.route('/login').post(validate(loginSchema),authcontrollers.login);
 
 router.route('/user').get(authMiddleware, authcontrollers.authctrl);
 
+router.route('/book-appointment').post(authMiddleware,authcontrollers.bookCtrl)
+
 module.exports = router;
