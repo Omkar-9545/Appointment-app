@@ -23,6 +23,7 @@ import { KolhapurDoc } from './pages/city1-doctors';
 import { GadhinglajDoc } from './pages/city2-doctors';
 import { SangliDoc } from './pages/city3-doctors';
 import { DocProfile } from './pages/doc-profile';
+import { Booking } from './pages/Booking-page';
 
 const App = () => {
   return (
@@ -44,7 +45,8 @@ const App = () => {
           <Route path='/sangli' element={<Sangli />} />
           <Route path='/sangli/:id/doctors' element={<SangliDoc/>} />
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
-          <Route path='/:id/doc/profile' element={<DocProfile/>} />
+          <Route path='/:id/doc/profile' element={<DocProfile />} />
+          <Route path='/:id/booking' element={<Booking/>} />
           <Route path='/notification' element={<Notification/>} />
           <Route path="/logout" element={<Logout />} />
           <Route path='/admin' element={<AdminLayout/>}>

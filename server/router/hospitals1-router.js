@@ -7,6 +7,7 @@ const router = express.Router();
 const validate = require("../middlewares/validate-middleware");
 const docSchema = require("../validators/doc-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
+const getDocInfo = require("../controllers/booking-controller");
 
 router.route("/kolhapur").get(authMiddleware,h1.hospitals1);
 
@@ -24,6 +25,8 @@ router.route("/sangli/:id/doctors").get(authMiddleware, h3.getallDoc3);
 
 router.route("/:id/doc/profile").get(authMiddleware, docContrl.docProfile)
 
-router.route("/:id/doc/profile/update").patch(authMiddleware,docContrl.updateProfile)
+router.route("/:id/doc/profile/update").patch(authMiddleware, docContrl.updateProfile)
+
+router.route('/:id/booking').get(authMiddleware,getDocInfo)
 
 module.exports = router;

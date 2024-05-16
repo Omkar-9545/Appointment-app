@@ -134,10 +134,11 @@ const approveDoc = async(req,res) => {
     try {
         const id = req.params.id;
         const status = req.body.status;
-        const doc = await Doctor.findByIdAndUpdate(id, { status });
+        const doc = await Doctor.findOneAndUpdate({ _id: id }, { status:'approved' });
+        
         const city = doc.city;
         if (city.toLowerCase() == 'kolhapur') {
-            const qry = await Kolhospital.findOne({ name: doc.hospital }, { doctors: 1 });
+            const qry = await Kolhospital.findOne({ name: doc.hospital }, {});
             const arr = qry.doctors;
             const id = qry._id;
             arr.push(doc)

@@ -3,7 +3,7 @@ import { useAuth } from "../store/auth";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const SangliDoc = () => {
     const [doctors, setDoctors] = useState([]);
@@ -49,7 +49,8 @@ export const SangliDoc = () => {
                                 <p>Specialization: {specialization}</p>
                                 <p>Experience: {experience} yrs</p>
                                 <p>Time : {startTime}am to {endTime}pm</p>
-                            </div>
+                                    </div>
+                                    <NavLink to={`/${curElem._id}/booking`}>Book Now</NavLink>
                         </div>
                                 </>
                    

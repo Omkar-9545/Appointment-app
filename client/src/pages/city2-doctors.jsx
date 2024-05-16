@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState } from "react";
-// import { NavLink } from 'react-router-dom';
 
 export const GadhinglajDoc = () => {
     const [doctors, setDoctors] = useState([]);
@@ -49,7 +48,8 @@ export const GadhinglajDoc = () => {
                                 <p>Specialization: {specialization}</p>
                                 <p>Experience: {experience} yrs</p>
                                 <p>Time : {startTime}am to {endTime}pm</p>
-                            </div>
+                                    </div>
+                                    <NavLink to={`/${curElem._id}/booking`}>Book Now</NavLink>
                         </div>
                                 </>
                    

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState } from "react";
 // import { NavLink } from 'react-router-dom';
 
@@ -42,14 +42,14 @@ export const KolhapurDoc = () => {
                                      
                             return (
                                 <><div className="card" key={index}>
-                                        {/* <NavLink to={`/kolhapur/${curElem._id}/doctors`}> */}
-                                        {/* </NavLink> */}
+                                        
                                     <div className="card-details">
-                                        <h2>Dr. {firstName} {lastName}</h2>
-                                        <p>Specialization: {specialization}</p>
-                                        <p>Experience: {experience} yrs</p>
-                                        <p>Time : {startTime}am to {endTime}pm</p>
-                                    </div>
+                                        <h2><b>Dr.</b> {firstName} {lastName}</h2>
+                                        <p><b>Specialization:</b> {specialization}</p>
+                                        <p><b>Experience:</b> {experience} yrs</p>
+                                        <p><b>Time:</b> {startTime} to {endTime}</p>
+                                        </div>
+                                        <NavLink to={`/${curElem._id}/booking`}>Book Now</NavLink>
                                 </div>
                                 </>
                    
