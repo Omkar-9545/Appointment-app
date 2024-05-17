@@ -1,5 +1,6 @@
 const appointmentModel = require("../models/appointment-model");
 const Doctor = require("../models/doctor-model");
+const User = require("../models/user-model")
 const moment = require("moment")
 
 const getDocInfo = async (req, res) => {
@@ -52,4 +53,23 @@ const getAppointment = async (req, res) => {
     }
 }
 
-module.exports = { getDocInfo, checkAvailablility, getAppointment };
+const updateAppointment = async(req,res) => {
+    try {
+        const { appointmentsId,status } = req.body
+        const response = await appointmentModel.findByIdAndUpdate(appointmentsId, { status });
+        const user = await User.findOne({ _id: response.userInfo._id.$oid });
+        const notification = user.notification
+        notification.push({
+            type: 'status Updated',
+            message: `Your appointment has been ${status}`,
+            onClickPath: '/:id/appointments'
+        });
+        await User.findByIdAndUpdate(user._id, { notification });
+        return res.status(200).json({ message: "Appointment status updated", success: true });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Error while updating status", success: false, error });
+    }
+}
+
+module.exports = { getDocInfo, checkAvailablility, getAppointment, updateAppointment };

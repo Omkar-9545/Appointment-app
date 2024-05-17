@@ -61,12 +61,10 @@ export const Appointment = () => {
                                     {curUser.status === 'pending' ?
                                         <>
                                     <td>
-                                        <button to={`${curUser._id}/edit`} className="updateLink">Approve</button>
+                                        <button className="updateLink">Approve</button>
                                     </td>
                                     <td>
-                                        <button onClick={() => {
-                                            deleteUser(curUser._id);
-                                        }}>Reject</button>
+                                        <button>Reject</button>
                                         </td>
                                     </>
                                         :
