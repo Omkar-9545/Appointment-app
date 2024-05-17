@@ -19,7 +19,7 @@ const getDocInfo = async (req, res) => {
 const checkAvailablility = async (req, res) => {
     try {
         const date = moment(req.body.date, 'DD-MM-YYYY').toISOString()
-        const fromTime = moment(req.body.time, 'HH:mm').subtract(0.05,'hours').toISOString()
+        const fromTime = moment(req.body.time, 'HH:mm').subtract(0.5,'hours').toISOString()
         const toTime = moment(req.body.time, 'HH:mm').add(0.5,'hours').toISOString()
         const doctorId = req.body.doctorId
         const appointments = await appointmentModel.find({
@@ -41,8 +41,8 @@ const checkAvailablility = async (req, res) => {
 
 const getAppointment = async (req, res) => {
     try {
-        const doctorId = req.params.id
-        const appointments = await appointmentModel.find({ doctorId }, {});
+        const userId = req.params.id
+        const appointments = await appointmentModel.find({ userId }, {});
         if (appointments.length > 0) {
             return res.status(200).json({ message: "All appointments fetched successfully", success: true, data: appointments });
         }

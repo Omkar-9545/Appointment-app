@@ -24,6 +24,7 @@ import { GadhinglajDoc } from './pages/city2-doctors';
 import { SangliDoc } from './pages/city3-doctors';
 import { DocProfile } from './pages/doc-profile';
 import { Booking } from './pages/Booking-page';
+import { Appointment } from './pages/Appointments';
 
 const App = () => {
   return (
@@ -53,7 +54,8 @@ const App = () => {
             <Route path='users' element={<AdminUsers />}/>
             <Route path='doctors' element={<AdminDoctors />}/>
           </Route>
-          <Route path='/admin/users/:id/edit' element={<AdminUpdate/>} />
+          <Route path='/admin/users/:id/edit' element={<AdminUpdate />} />
+          <Route path='/:id/appointments' element={<Appointment/>} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer/>

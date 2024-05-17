@@ -13,6 +13,7 @@ export const Booking = () => {
     const { user } = useAuth();
     const [doctor, setDoctor] = useState({});
     const [date, setDate] = useState("");
+    const [isAvailable, setIsAvailable] = useState(false);
 
         const [appointment, setAppointment] = useState({
             userId: doctor.userId,
@@ -72,6 +73,29 @@ export const Booking = () => {
     appointment.userId = doctor.userId
     appointment.userInfo = user
 
+    const availabilityHandler = async() => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/hospital/available`, {
+                method:"POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    Authorization:`Bearer ${localStorage.getItem('token')}`
+                },
+                body:JSON.stringify(appointment)
+            })
+            const res_data = await response.json()
+            if (res_data.success) {
+                toast.success(res_data.message)
+                setIsAvailable(true)
+            } else {
+                toast.error(res_data.message)
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error("error while checking for availability")
+        }
+    }
+
     const bookHandler = async() => {
         try {
             const response = await fetch(`http://localhost:5000/api/auth/book-appointment`, {
@@ -123,8 +147,13 @@ export const Booking = () => {
                         </div>
                     </div>
                     <div className="book">
-                        <button className="btn btn-primary">Check Availability</button>
-                        <button className="btn btn-primary book" onClick={bookHandler}>Book Now</button>
+                    <button className="btn btn-primary" onClick={availabilityHandler}>Check Availability</button>
+                        {isAvailable
+                            ?
+                            <button className="btn btn-primary book" onClick={bookHandler}>Book Now</button>
+                            :
+                            ""
+                        }
                     </div>
                 </div>
          </section>
