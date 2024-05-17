@@ -1,6 +1,7 @@
 const User = require("../models/user-model")
 const bcrypt = require("bcryptjs");
 const appointmentModel = require("../models/appointment-model");
+const moment = require("moment")
 // HOME LOGIC //
 
 const home = async (req, res) => {
@@ -92,8 +93,10 @@ const authctrl = async(req,res) => {
 
 const bookCtrl = async(req,res) => {
     try {
+        req.body.date = moment(req.body.date, 'DD-MM-YYYY').toISOString()
+        req.body.time = moment(req.body.time, 'HH:mm').toISOString()
         req.body.status = 'pending';
-        const newAppointment = await appointmentModel.create(req.body);
+        await appointmentModel.create(req.body);
         const user = await User.findOne({ _id: req.body.userId });
         const notification = user.notification
         notification.push({

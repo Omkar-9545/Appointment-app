@@ -19,8 +19,7 @@ export const Booking = () => {
             doctorId: params.id,
             userInfo: user,
             date: date,
-            startTime: "",
-            endTime: "",
+            time: "",
             status: "pending"
         });
     
@@ -113,21 +112,12 @@ export const Booking = () => {
                             onChange={handle}
                             editableDateInputs={true} />
                         <div className='stt'>
-                            <label htmlFor="startTime" >From: </label>
+                            <label htmlFor="startTime" >Time: </label>
                                 <input
                                 type="time"
-                                name="startTime"
-                                id="user-startTime"
-                                value={appointment.startTime}
-                                onChange={handleInput}
-                                required />
-                        
-                            <label htmlFor="endTime" className='edt'>To: </label>
-                                <input
-                                type="time"
-                                name="endTime"
-                                id="user-endTime"
-                                value={appointment.endTime}
+                                name="time"
+                                id="user-time"
+                                value={appointment.time}
                                 onChange={handleInput}
                                 required />
                         </div>

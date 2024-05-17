@@ -17,13 +17,9 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         require: [true, 'date is required']
     },
-    startTime: {
+    time: {
         type: String,
         require: [true, 'start time is required']
-    },
-    endTime: {
-        type: String,
-        require: [true, 'end time is required']
     },
     status: {
         type: String,
