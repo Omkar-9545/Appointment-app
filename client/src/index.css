@@ -486,3 +486,24 @@ body tr{
 .book{
   margin-left: 8px;
 }
+
+.stt{
+  margin-top: 3.2rem;
+}
+
+.edt{
+  margin-left: 1.2rem;
+}
+
+.mr{
+  margin-right: 1.5rem !important;
+}
+
+.ml1{
+  margin-left: 2.5rem !important;
+}
+
+.ml2{
+  margin-left: 3.2rem !important;
+}
+

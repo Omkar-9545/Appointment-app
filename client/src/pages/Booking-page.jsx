@@ -112,7 +112,7 @@ export const Booking = () => {
                             value={appointment.date}
                             onChange={handle}
                             editableDateInputs={true} />
-                        <div>
+                        <div className='stt'>
                             <label htmlFor="startTime" >From: </label>
                                 <input
                                 type="time"
@@ -121,9 +121,8 @@ export const Booking = () => {
                                 value={appointment.startTime}
                                 onChange={handleInput}
                                 required />
-                        </div>
-                        <div>
-                            <label htmlFor="endTime" >To: </label>
+                        
+                            <label htmlFor="endTime" className='edt'>To: </label>
                                 <input
                                 type="time"
                                 name="endTime"

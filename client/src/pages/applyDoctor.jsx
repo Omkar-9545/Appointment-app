@@ -69,12 +69,13 @@ export const ApplyDoctor = () => {
                         <div className="section-registration">
                             <div className="container grid grid-two-cols">
                                 
-                                <div className="registration-form">
+                                <div>
                                     <h1 className="main-heading mb-3">Doctor Form</h1>
                                     <br />
                                     <form onSubmit={handleSubmit}>
-                                        <div>
-                                            <label htmlFor="name">FirstName</label>
+                                        <p>Personal Details:</p>
+                                        <div className="container">
+                                            <label htmlFor="name" className="ml1">FirstName</label>
                                             <input
                                                 type="text"
                                                 name="firstName"
@@ -85,9 +86,8 @@ export const ApplyDoctor = () => {
                                                 value={doctor.firstName}
                                                 onChange={handleInput}
                                             />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="name">LastName</label>
+                                        
+                                            <label htmlFor="name" className="ml2">LastName</label>
                                             <input
                                                 type="text"
                                                 name="lastName"
@@ -99,8 +99,8 @@ export const ApplyDoctor = () => {
                                                 onChange={handleInput}
                                             />
                                         </div>
-                                        <div>
-                                            <label htmlFor="phone">Phone</label>
+                                        <div className="container">
+                                            <label htmlFor="phone" className="ml1">Phone</label>
                                             <input
                                                 type="number"
                                                 name="phone"
@@ -110,10 +110,10 @@ export const ApplyDoctor = () => {
                                                 required
                                                 value={doctor.phone}
                                                 onChange={handleInput}
+                                              
                                             />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="email">Email</label>
+                                        
+                                            <label htmlFor="email" className="ml">Email</label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -125,8 +125,9 @@ export const ApplyDoctor = () => {
                                                 onChange={handleInput}
                                             />
                                         </div>
-                                        <div>
-                                            <label htmlFor="phone">Specialization</label>
+                                        <p>Professional Details:</p>
+                                        <div className="container">
+                                            <label htmlFor="phone" className="ml1">Specialization </label>
                                             <input
                                                 type="text"
                                                 name="specialization"
@@ -136,10 +137,10 @@ export const ApplyDoctor = () => {
                                                 required
                                                 value={doctor.specialization}
                                                 onChange={handleInput}
+                                                className="ml1"
                                             />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="phone">Experience</label>
+                                        
+                                            <label htmlFor="phone" className="ml2">Experience </label>
                                             <input
                                                 type="number"
                                                 name="experience"
@@ -149,32 +150,38 @@ export const ApplyDoctor = () => {
                                                 required
                                                 value={doctor.experience}
                                                 onChange={handleInput}
+                                                className="ml1"
                                             />
                                         </div>
+                                        <p>Timings:</p>
                                          <div>
-                                                <label htmlFor="startTime" >From:</label>
+                                                <label htmlFor="startTime" className="ml1">From:</label>
                                                 <input
                                                     type="time"
                                                     name="startTime"
                                                     id="user-startTime"
                                                     value={doctor.startTime}
                                                     onChange={handleInput}
-                                                    required />
-                                            </div>
+                                                required
+                                              
+                                            />
                                             
-                                        <div>
-                                                <label for="endTime" >To:</label>
+                                                <label for="endTime" className="ml2">To:</label>
                                                 <input
                                                     type="time"
                                                     name="endTime"
                                                     id="user-endTime"
                                                     value={doctor.endTime}
                                                     onChange={handleInput}
-                                                    required
+                                                required
+                                              
                                                 />
-                                            </div>
-                                        <div>
-                                            <label htmlFor="city">City</label>
+                                        </div>
+                                        <br />
+                                        <br/>
+                                        <p>WorkPlace Details:</p>
+                                        <div className="container">
+                                            <label htmlFor="city" className="ml1">City</label>
                                             <input
                                                 type="text"
                                                 name="city"
@@ -185,9 +192,8 @@ export const ApplyDoctor = () => {
                                                 value={doctor.city}
                                                 onChange={handleInput}
                                             />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="hospital">Hospital Name</label>
+                                        
+                                            <label htmlFor="hospital" className="ml2">Hospital Name</label>
                                             <input
                                                 type="text"
                                                 name="hospital"
@@ -197,10 +203,10 @@ export const ApplyDoctor = () => {
                                                 required
                                                 value={doctor.hospital}
                                                 onChange={handleInput}
+                                                className="mr"
                                             />
                                         </div>
-                                        <br />
-                                        <button type="submit" className="btn btn-submit">Apply</button>
+                                        <button type="submit" className="btn btn-submit stt">Apply</button>
                                     </form>
                                 </div>
                             </div>
