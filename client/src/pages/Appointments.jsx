@@ -13,6 +13,7 @@ export const Appointment = () => {
         return <h2>Loading....</h2>
     }
     const [appointments, setAppointments] = useState([]);
+    const [action, setAction] = useState(true);
 
     const getAppointment = async () => {
         try {
@@ -45,8 +46,8 @@ export const Appointment = () => {
                                 <th>Phone</th>
                                 <th>Date & Time</th>
                                 <th>Status</th>
-                                <th>Approve</th>
-                                <th>Reject</th>
+                                <th>Actions</th>
+                                
                                 
                             </tr>
                         </thead>
@@ -57,6 +58,8 @@ export const Appointment = () => {
                                     <td>{curUser.userInfo.phone}</td>
                                     <td>{moment(curUser.date).format("DD-MM-YYYY")} {moment(curUser.time).format("HH:mm")}</td>
                                     <td>{curUser.status}</td>
+                                    {curUser.status === 'pending' ?
+                                        <>
                                     <td>
                                         <button to={`${curUser._id}/edit`} className="updateLink">Approve</button>
                                     </td>
@@ -64,7 +67,10 @@ export const Appointment = () => {
                                         <button onClick={() => {
                                             deleteUser(curUser._id);
                                         }}>Reject</button>
-                                    </td>
+                                        </td>
+                                    </>
+                                        :
+                                        <h2 className="txt">No Actions</h2>}
                                 </tr>
                              })}
                         </tbody>

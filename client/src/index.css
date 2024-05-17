@@ -367,6 +367,11 @@ th{
   box-shadow: 0 0 0.2rem 0 grey;
   margin-bottom: 10px;
   text-transform: capitalize;
+
+  &:last-child{
+    box-shadow: none;
+    text-align: right;
+  }
 }
 
 td{
@@ -505,4 +510,9 @@ body tr{
 
 .ml2{
   margin-left: 3.2rem !important;
+}
+
+.txt{
+  color: black;
+  margin-left: 15rem;
 }
