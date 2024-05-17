@@ -39,4 +39,17 @@ const checkAvailablility = async (req, res) => {
     }
 }
 
-module.exports = { getDocInfo, checkAvailablility };
+const getAppointment = async (req, res) => {
+    try {
+        const doctorId = req.params.id
+        const appointments = await appointmentModel.find({ doctorId }, {});
+        if (appointments.length > 0) {
+            return res.status(200).json({ message: "All appointments fetched successfully", success: true, data: appointments });
+        }
+        return res.status(404).json({ message: "No appointments found", success: false });
+    } catch (error) {
+        return res.status(500).json({ message: "Error while getting all the appointments", success: false, error });
+    }
+}
+
+module.exports = { getDocInfo, checkAvailablility, getAppointment };
