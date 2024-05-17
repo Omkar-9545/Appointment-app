@@ -60,7 +60,7 @@ const updateAppointment = async(req,res) => {
         const user = await User.findOne({ _id: response.userInfo._id.$oid });
         const notification = user.notification
         notification.push({
-            type: 'status Updated',
+            type: 'Status Updated',
             message: `Your appointment has been ${status}`,
             onClickPath: '/:id/appointments'
         });
