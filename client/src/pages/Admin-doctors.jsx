@@ -73,14 +73,17 @@ export const AdminDoctors = () => {
                             <td>{curDoc.status}</td>
                             <td>{curDoc.phone}</td>
                             {
-                                curDoc.status === 'pending' ?
+                                curDoc.status === 'pending' ?<>
                                     <td>
                                 <button onClick={()=>approveDoc(curDoc._id)} className="updateLink">Approve</button>
                                     </td>
-                                    :
+                                    
                                     <td>
                                 <button onClick={() => {deleteUser(curDoc._id);}}>Reject</button>
                                     </td>
+                                    </>
+                                    :
+                                <h2 className="txt">No actions</h2>
                             }
                         </tr>
                      })}

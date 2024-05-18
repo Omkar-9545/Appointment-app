@@ -31,7 +31,7 @@ const checkAvailablility = async (req, res) => {
             }
         })
         if (appointments.length > 0) {
-            return res.status(400).json({ message: "Appointment is not available at this time", success: false });
+            return res.status(200).json({ message: "Appointment is not available at this time", success: false });
         } else {
             return res.status(200).json({ message: "Appointment available", success: true });
         }
@@ -47,7 +47,7 @@ const getAppointment = async (req, res) => {
         if (appointments.length > 0) {
             return res.status(200).json({ message: "All appointments fetched successfully", success: true, data: appointments });
         }
-        return res.status(404).json({ message: "No appointments found", success: false });
+        return res.status(200).json({ message: "No appointments found", success: false });
     } catch (error) {
         return res.status(500).json({ message: "Error while getting all the appointments", success: false, error });
     }
@@ -57,12 +57,11 @@ const updateAppointment = async(req,res) => {
     try {
         const { appointmentsId,status } = req.body
         const response = await appointmentModel.findByIdAndUpdate(appointmentsId, { status });
-        const user = await User.findOne({ _id: response.userInfo._id.$oid });
+        const user = await User.findOne({ _id: response.userInfo._id }); 
         const notification = user.notification
         notification.push({
             type: 'Status Updated',
-            message: `Your appointment has been ${status}`,
-            onClickPath: '/:id/appointments'
+            message: `Your appointment has been ${status}`
         });
         await User.findByIdAndUpdate(user._id, { notification });
         return res.status(200).json({ message: "Appointment status updated", success: true });

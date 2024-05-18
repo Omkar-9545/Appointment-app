@@ -13,7 +13,7 @@ export const Appointment = () => {
         return <h2>Loading....</h2>
     }
     const [appointments, setAppointments] = useState([]);
-    const [action, setAction] = useState(true);
+    
 
     const getAppointment = async () => {
         try {
@@ -22,7 +22,9 @@ export const Appointment = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            setAppointments(response.data.data)
+            if (response.data.success) {
+                setAppointments(response.data.data)
+            }
         } catch (error) {
             // console.log(error)
             toast.error("Error while getting Appointments")
@@ -32,6 +34,24 @@ export const Appointment = () => {
             getAppointment();
         }, [])
     
+    const updateStatus = async(sts,id) => {
+        try {
+            const obj = { status: sts, appointmentsId: id };
+            const response = await fetch(`http://localhost:5000/api/hospital/update-status`, {
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(obj)
+            });
+            if (response.ok) {
+                getAppointment()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     return <>
              <section className="admin-users-section">
@@ -58,14 +78,19 @@ export const Appointment = () => {
                                     <td>{curUser.userInfo.phone}</td>
                                     <td>{moment(curUser.date).format("DD-MM-YYYY")} {moment(curUser.time).format("HH:mm")}</td>
                                     <td>{curUser.status}</td>
-                                    {curUser.status === 'pending' ?
+                                    {
+                                        curUser.status === 'pending' ?
                                         <>
                                     <td>
-                                        <button className="updateLink">Approve</button>
+                                                    <button className="updateLink" onClick={() => {
+                                                        updateStatus('approved', curUser._id);
+                                                    }}>Approve</button>
                                     </td>
                                     <td>
-                                        <button>Reject</button>
-                                        </td>
+                                                    <button onClick={() => {
+                                                        updateStatus('rejected', curUser._id)
+                                                    }}>Reject</button>
+                                    </td>
                                     </>
                                         :
                                         <h2 className="txt">No Actions</h2>}
