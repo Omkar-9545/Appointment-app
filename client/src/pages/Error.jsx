@@ -14,7 +14,7 @@ export const Error = () => {
                     </p>
                     <div className="btns">
                         <NavLink to="/" className="err-btn">Return home</NavLink>
-                        <NavLink to="/services" className="err-btn">Report Problem</NavLink>
+                        <NavLink to="/options" className="err-btn">Report Problem</NavLink>
                     </div>
                 </div>
             </section>

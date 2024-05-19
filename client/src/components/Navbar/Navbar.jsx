@@ -17,6 +17,9 @@ export const Navbar = () => {
                     </div>
                     <nav>
                         <ul>
+                            <li >
+                                <NavLink to="/">Home</NavLink>
+                            </li>
                             <li>
                             { isLoggedIn && !isLoading && user.isAdmin ? <NavLink to="/admin">Admin menu</NavLink>:""}
                             </li>
@@ -24,18 +27,20 @@ export const Navbar = () => {
                                 {isLoggedIn && !isLoading && !user.isAdmin && user.isDoctor ? <ul>
                                     <li><NavLink to={`/${user._id}/doc/profile`}>Doctor Profile</NavLink></li>
                                     <li><NavLink to={`/${user._id}/appointments`}>Appointments</NavLink></li>
-                                </ul> : ""}
+                                    <li><NavLink to={`/${user._id}/leaves`}>Apply Leaves</NavLink></li>
+                                </ul> : "" }
                             </li>
-                            <li >
-                                <NavLink to="/">Home</NavLink>
-                            </li>
+                            {isLoggedIn && !isLoading && !user.isAdmin && !user.isDoctor ?
+                                <li><NavLink to="/services">Hospitals</NavLink></li>
+                                : ""
+                            }
+                            
                             <li>
                                 {isLoggedIn && !isLoading 
                                     ?
                                     
                                         <ul>
-                                            <li><NavLink to="/profile">{user.name}</NavLink></li>
-                                            <li ><NavLink to="/services">Hospitals</NavLink> </li>
+                                            <li><NavLink to="/profile">User Profile</NavLink></li>
                                             <li><NavLink to="/logout">Logout</NavLink></li>
                                             <li>
                                                 <a href="/notification" class="notification">

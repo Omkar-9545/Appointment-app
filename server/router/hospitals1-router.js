@@ -34,6 +34,8 @@ router.route('/available').post(validate(appointmentSchema),authMiddleware, book
 
 router.route('/:id/appointments').get(authMiddleware, booking.getAppointment)
 
-router.route('/update-status').post(authMiddleware,booking.updateAppointment)
+router.route('/update-status').post(authMiddleware, booking.updateAppointment)
+
+router.route('/:id/leaves').post(authMiddleware,booking.applyLeaves)
 
 module.exports = router;
