@@ -36,7 +36,8 @@ export const Booking = () => {
             setLoad(false)
             setDoctor(response.data.data)
         } catch (error) {
-            
+            // next(error)
+            toast.error(error)
         }
     }
 
@@ -88,11 +89,11 @@ export const Booking = () => {
                 toast.success(res_data.message)
                 setIsAvailable(true)
             } else {
-                toast.error(res_data.message)
+                toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
             }
         } catch (error) {
-            console.log(error)
-            toast.error("error while checking for availability")
+            next(error)
+            // toast.error("error while checking for availability")
         }
     }
 

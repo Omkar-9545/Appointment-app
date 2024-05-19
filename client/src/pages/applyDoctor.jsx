@@ -73,7 +73,7 @@ export const ApplyDoctor = () => {
                                     <h1 className="main-heading mb-3">Doctor Form</h1>
                                     <br />
                                     <form onSubmit={handleSubmit}>
-                                        <p>Personal Details:</p>
+                                        <p><b>Personal Details:</b></p>
                                         <div className="container">
                                             <label htmlFor="name" className="ml1">FirstName</label>
                                             <input
@@ -83,7 +83,7 @@ export const ApplyDoctor = () => {
                                                 placeholder="name"
                                                 autoComplete="off"
                                                 required
-                                                value={doctor.firstName}
+                                                value={user.name}
                                                 onChange={handleInput}
                                             />
                                         
@@ -108,7 +108,7 @@ export const ApplyDoctor = () => {
                                                 placeholder="phone"
                                                 autoComplete="off"
                                                 required
-                                                value={doctor.phone}
+                                                value={user.phone}
                                                 onChange={handleInput}
                                               
                                             />
@@ -121,11 +121,11 @@ export const ApplyDoctor = () => {
                                                 placeholder="email"
                                                 autoComplete="off"
                                                 required
-                                                value={doctor.email}
+                                                value={user.email}
                                                 onChange={handleInput}
                                             />
                                         </div>
-                                        <p>Professional Details:</p>
+                                        <p><b>Professional Details:</b></p>
                                         <div className="container">
                                             <label htmlFor="phone" className="ml1">Specialization </label>
                                             <input
@@ -140,7 +140,7 @@ export const ApplyDoctor = () => {
                                                 className="ml1"
                                             />
                                         
-                                            <label htmlFor="phone" className="ml2">Experience </label>
+                                            <label htmlFor="phone" className="ml2">Experience (in years)</label>
                                             <input
                                                 type="number"
                                                 name="experience"
@@ -153,7 +153,8 @@ export const ApplyDoctor = () => {
                                                 className="ml1"
                                             />
                                         </div>
-                                        <p>Timings:</p>
+                                        <p><b>Timings (24hr format):</b></p>
+                                        <br/>
                                          <div>
                                                 <label htmlFor="startTime" className="ml1">From:</label>
                                                 <input
@@ -179,7 +180,7 @@ export const ApplyDoctor = () => {
                                         </div>
                                         <br />
                                         <br/>
-                                        <p>WorkPlace Details:</p>
+                                        <p><b>WorkPlace Details:</b></p>
                                         <div className="container">
                                             <label htmlFor="city" className="ml1">City</label>
                                             <input

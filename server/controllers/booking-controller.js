@@ -20,9 +20,14 @@ const getDocInfo = async (req, res) => {
 const checkAvailablility = async (req, res) => {
     try {
         const date = moment(req.body.date, 'DD-MM-YYYY').toISOString()
-        const fromTime = moment(req.body.time, 'HH:mm').subtract(0.5,'hours').toISOString()
-        const toTime = moment(req.body.time, 'HH:mm').add(0.5,'hours').toISOString()
+        const time = moment(req.body.time,"HH:mm").toISOString()
+        const fromTime = moment(req.body.time, 'HH:mm').subtract(0.5, 'hours').toISOString()
+        const toTime = moment(req.body.time, 'HH:mm').add(0.5, 'hours').toISOString()
         const doctorId = req.body.doctorId
+        const doctime = await Doctor.findOne({ _id: doctorId }, { startTime: 1, endTime: 1 });
+        const stTime = moment(doctime.startTime, "HH:mm").toISOString()
+        const edTime = moment(doctime.endTime, "HH:mm").subtract(0.5, 'hours').toISOString();
+        if (time < stTime || time > edTime) return res.status(400).json({ message: "Please check doctor availability timings", success: false });
         const appointments = await appointmentModel.find({
             doctorId,
             date,
@@ -36,6 +41,7 @@ const checkAvailablility = async (req, res) => {
             return res.status(200).json({ message: "Appointment available", success: true });
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: "Error while checking availability", success: false, error });
     }
 }

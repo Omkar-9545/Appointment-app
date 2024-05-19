@@ -100,7 +100,7 @@ export const Notification = () => {
                             <p>{`${idx+1}- ${message}`}</p>
                     </>
                     );
-                })):"No Read messages"
+                })):"No Unread messages"
             }
                 </p>
             </div>

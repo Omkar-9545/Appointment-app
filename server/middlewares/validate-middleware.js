@@ -7,7 +7,6 @@ const validate = (schema) => async (req,res,next) => {
         const message = "Invalid Input!!"
         const status = 422;
         const extraDetails = err.errors[0].message;
-
         const error = {
             status,
             message,

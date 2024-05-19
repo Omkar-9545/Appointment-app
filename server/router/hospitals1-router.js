@@ -8,6 +8,7 @@ const validate = require("../middlewares/validate-middleware");
 const docSchema = require("../validators/doc-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
 const booking = require("../controllers/booking-controller");
+const appointmentSchema = require("../validators/appointment-validator");
 
 router.route("/kolhapur").get(authMiddleware,h1.hospitals1);
 
@@ -29,7 +30,7 @@ router.route("/:id/doc/profile/update").patch(authMiddleware, docContrl.updatePr
 
 router.route('/:id/booking').get(authMiddleware, booking.getDocInfo)
 
-router.route('/available').post(authMiddleware, booking.checkAvailablility)
+router.route('/available').post(validate(appointmentSchema),authMiddleware, booking.checkAvailablility)
 
 router.route('/:id/appointments').get(authMiddleware, booking.getAppointment)
 

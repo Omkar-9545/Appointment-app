@@ -14,7 +14,7 @@ export const About = () => {
                         <p>Your well-being starts here!!</p>
                         
                         <div className="btn btn-group">
-                            <NavLink to="/services" className="btn  secondary-btn">Learn More </NavLink>
+                            <NavLink to="/options" className="btn  secondary-btn">Learn More </NavLink>
                         </div>
                     </div>
                     {/* hero images*/}

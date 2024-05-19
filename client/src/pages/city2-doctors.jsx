@@ -47,7 +47,7 @@ export const GadhinglajDoc = () => {
                                 <h2>Dr. {firstName} {lastName}</h2>
                                 <p>Specialization: {specialization}</p>
                                 <p>Experience: {experience} yrs</p>
-                                <p>Time : {startTime}am to {endTime}pm</p>
+                                <p>Time : {startTime} to {endTime}</p>
                                     </div>
                                     <NavLink to={`/${curElem._id}/booking`}>Book Now</NavLink>
                         </div>

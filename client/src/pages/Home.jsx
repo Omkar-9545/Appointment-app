@@ -24,7 +24,7 @@ export const Home = () => {
                             <NavLink to="/about"
                              className=" btn secondary-btn">About us
                             </NavLink>
-                            <NavLink to="/services"
+                            <NavLink to="/options"
                                 className="btn  secondary-btn">Learn More
                             </NavLink>
                         </div>

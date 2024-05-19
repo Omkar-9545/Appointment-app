@@ -25,6 +25,7 @@ import { SangliDoc } from './pages/city3-doctors';
 import { DocProfile } from './pages/doc-profile';
 import { Booking } from './pages/Booking-page';
 import { Appointment } from './pages/Appointments';
+import { Options } from './pages/Options';
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
+          <Route path='/options' element={<Options/>} />
           <Route path='/profile' element={<Profile/>} />
           <Route path="/services" element={<Service />} />
           <Route path="/kolhapur" element={<Kolhapur />} />
