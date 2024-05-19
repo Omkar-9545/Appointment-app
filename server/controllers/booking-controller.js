@@ -33,7 +33,8 @@ const checkAvailablility = async (req, res) => {
             date,
             time: {
                 $gte: fromTime, $lte: toTime
-            }
+            },
+            status:'approved',
         })
         if (appointments.length > 0) {
             return res.status(200).json({ message: "Appointment is not available at this time", success: false });

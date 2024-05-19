@@ -89,6 +89,7 @@ export const Booking = () => {
                 toast.success(res_data.message)
                 setIsAvailable(true)
             } else {
+                setIsAvailable(false)
                 toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
             }
         } catch (error) {

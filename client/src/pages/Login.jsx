@@ -12,7 +12,8 @@ export const Login = () => {
     });
 
     const navigate = useNavigate();
-    const { storeToken } = useAuth();
+    const { storeToken, isLoggedIn } = useAuth();
+    
     
     const handleInput = (e) => {
         // console.log(e);
@@ -60,6 +61,10 @@ export const Login = () => {
             // console.log(error.message);
             next(error);
         }
+    }
+    
+    if (isLoggedIn) {
+        return navigate('/');
     }
 
     return (<>
