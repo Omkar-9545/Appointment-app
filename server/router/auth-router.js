@@ -17,6 +17,8 @@ router.route('/login').post(validate(loginSchema),authcontrollers.login);
 
 router.route('/user').get(authMiddleware, authcontrollers.authctrl);
 
-router.route('/book-appointment').post(authMiddleware,authcontrollers.bookCtrl)
+router.route('/book-appointment').post(authMiddleware, authcontrollers.bookCtrl)
+
+router.route('/:id/substitute-doctors').post(authMiddleware,authcontrollers.substituteDoc)
 
 module.exports = router;

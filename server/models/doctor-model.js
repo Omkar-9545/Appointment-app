@@ -47,7 +47,8 @@ const docSchema = mongoose.Schema({
     hospital: {
         type: String,
         require:[true,'hospital name is required']
-    }
+    },
+    
 }, { timestamps: true });
 
 const Doctor = new mongoose.model("Doctor", docSchema);

@@ -1,6 +1,8 @@
 const User = require("../models/user-model")
 const bcrypt = require("bcryptjs");
 const appointmentModel = require("../models/appointment-model");
+const Doctor = require("../models/doctor-model");
+const Substitute = require("../models/substitute-model");
 const moment = require("moment")
 // HOME LOGIC //
 
@@ -112,4 +114,18 @@ const bookCtrl = async(req,res) => {
     }
 }
 
-module.exports = { home, register, login, authctrl, bookCtrl };
+const substituteDoc = async (req, res) => {
+    try {
+        const id = req.params.id
+        const userId = req.body.userId
+        const doctor = await Doctor.findOne({ _id: userId });
+        const substitutes = [];
+        substitutes.push(doctor)
+        const subs = await Substitute.create({ substitutes, doctorId: id });
+        return res.status(201).json({ message: "Added substitute doctor successfully", success: true, data: subs });
+    } catch (error) {
+        return res.status(500).json({ message: "Error while fetching substitute doctors", success: false, error });
+    }
+}
+
+module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc };

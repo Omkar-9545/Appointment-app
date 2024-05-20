@@ -530,6 +530,7 @@ select{
   color: black;
   background-color: white;
   font-size: large;
+  cursor: pointer;
 }
 
 select:focus{
