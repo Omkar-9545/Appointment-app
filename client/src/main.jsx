@@ -15,14 +15,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         position='top-right'
         autoClose={3000}
         hideProgressBar={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme='colored'
-        bodyClassName="toatBody"
+        bodyClassName="toastBody"
       
       />
     </React.StrictMode>

@@ -9,6 +9,7 @@ const docSchema = require("../validators/doc-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
 const booking = require("../controllers/booking-controller");
 const appointmentSchema = require("../validators/appointment-validator");
+const leaveSchema = require("../validators/leave-validator");
 
 router.route("/kolhapur").get(authMiddleware,h1.hospitals1);
 
@@ -36,6 +37,6 @@ router.route('/:id/appointments').get(authMiddleware, booking.getAppointment)
 
 router.route('/update-status').post(authMiddleware, booking.updateAppointment)
 
-router.route('/:id/leaves').post(authMiddleware,booking.applyLeaves)
+router.route('/:id/leaves').post(validate(leaveSchema),authMiddleware,booking.applyLeaves)
 
 module.exports = router;
