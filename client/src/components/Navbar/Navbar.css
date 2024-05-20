@@ -9,3 +9,41 @@ ul{
     display: flex;
     gap: 3.2rem;
 }
+
+.dropdown1 {
+    display: inline-block;
+    position: relative;
+  }
+
+.dropdown-options {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    background-color:#fff;
+    border-radius:5px;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+
+.dropdown1:hover .dropdown-options {
+    display: block;
+}
+
+.dropdown-options .link{
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+.dropdown-options .link:hover {
+    background-color: #ddd;
+    border-radius:5px;
+  }
+
+#menu1{
+    padding-top: 2px;
+    background-color: rgb(20, 19, 19);
+    color: #646cff;
+    
+}

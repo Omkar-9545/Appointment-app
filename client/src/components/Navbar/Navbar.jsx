@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import "./Navbar.css"
 import { useAuth } from '../../store/auth';
 
@@ -7,7 +7,7 @@ export const Navbar = () => {
     // const token = localStorage.getItem("token");
     // let isLoggedIn = !!token;
     const { isLoggedIn, user, isLoading } = useAuth();
-
+    const navigate = useNavigate()
     return (
         <>
             <header>
@@ -24,11 +24,21 @@ export const Navbar = () => {
                             { isLoggedIn && !isLoading && user.isAdmin ? <NavLink to="/admin">Admin menu</NavLink>:""}
                             </li>
                             <li>
-                                {isLoggedIn && !isLoading && !user.isAdmin && user.isDoctor ? <ul>
-                                    <li><NavLink to={`/${user._id}/doc/profile`}>Doctor Profile</NavLink></li>
-                                    <li><NavLink to={`/${user._id}/appointments`}>Appointments</NavLink></li>
-                                    <li><NavLink to={`/${user._id}/leaves`}>Apply Leaves</NavLink></li>
-                                </ul> : "" }
+                                {isLoggedIn && !isLoading && !user.isAdmin && user.isDoctor ?
+                                    // trying out dropdown menu
+                                    <>
+                                    <div className="dropdown1">
+                                        <select name="menu" id="menu1">
+                                                <option selected hidden>Doctor Menu</option>      
+                                            </select>
+                                            <div className="dropdown-options">
+                                                <NavLink to={`/${user._id}/doc/profile`} className="link">Doctor Profile</NavLink> 
+                                                <NavLink to={`/${user._id}/appointments`} className="link"> Appointments</NavLink>
+                                                <NavLink to={`/${user._id}/leaves`} className="link">Apply Leaves</NavLink>
+                                                <NavLink to={`/${user._id}/substitute-doctors`} className="link">Add Substitute Doctor</NavLink>
+                                        </div>
+                                        </div>         
+                             </> : "" }
                             </li>
                             {isLoggedIn && !isLoading && !user.isAdmin && !user.isDoctor ?
                                 <li><NavLink to="/services">Hospitals</NavLink></li>
