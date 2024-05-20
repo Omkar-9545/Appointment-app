@@ -13,6 +13,7 @@ export const Booking = () => {
     const { user } = useAuth();
     const [doctor, setDoctor] = useState({});
     const [date, setDate] = useState("");
+    const [loaded, setLoaded] = useState(false);
     const [isAvailable, setIsAvailable] = useState(false);
 
         const [appointment, setAppointment] = useState({
@@ -42,6 +43,8 @@ export const Booking = () => {
     }
 
     const handle = (value) => {
+        setLoaded(false)
+        setIsAvailable(false)
         let ans = value.toString()
         ans = ans.split(" ")
         let month = ans[1].toLowerCase()
@@ -63,6 +66,8 @@ export const Booking = () => {
     }
 
     const handleInput = (e) => {
+        setLoaded(false)
+        setIsAvailable(false)
         const name = e.target.name;
         const value = e.target.value;
         setAppointment({
@@ -76,6 +81,7 @@ export const Booking = () => {
 
     const availabilityHandler = async() => {
         try {
+            setLoaded(false)
             const response = await fetch(`http://localhost:5000/api/hospital/available`, {
                 method:"POST",
                 headers: {
@@ -87,10 +93,12 @@ export const Booking = () => {
             const res_data = await response.json()
             if (res_data.success) {
                 toast.success(res_data.message)
+                setLoaded(true)
                 setIsAvailable(true)
             } else {
+                setLoaded(true)
                 setIsAvailable(false)
-                toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
+                toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
         } catch (error) {
             next(error)
@@ -110,6 +118,13 @@ export const Booking = () => {
             })
             if (response.ok) {
                 toast.success("Booking Appointment Successful")
+                setAppointment({
+                    userId: "",
+                    doctorId: "",
+                    userInfo: "",
+                    date: "",
+                    time: "",
+                    status: "pending"})
             }
         } catch (error) {
             toast.error('Error while booking')
@@ -156,6 +171,7 @@ export const Booking = () => {
                             :
                             ""
                         }
+                        {!isAvailable && loaded ?<button className='btn btn-primary book'>Substitute Doctors</button>:""}
                     </div>
                 </div>
          </section>
