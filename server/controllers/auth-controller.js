@@ -114,6 +114,21 @@ const bookCtrl = async(req,res) => {
     }
 }
 
+const getSameDoc = async(req,res) => {
+    try {
+        const id = req.params.id
+        const doctortype = await Doctor.findOne({ userId: id });
+        const alldoc = await Doctor.find({ specialization: doctortype.specialization, hospital: doctortype.hospital });
+        if (alldoc.length) {
+            return res.status(200).json({ message: "All doctor of same type fetched successfully", success: true, data: alldoc });
+        } else {
+            return res.status(200).json({ mssage: "There are no doctor of same type in the hospital", success: false });
+        }
+    } catch (error) {
+        return res.status(500).json({ messge: "Error while getting same type doctor", success: false, error });
+    }
+}
+
 const substituteDoc = async (req, res) => {
     try {
         const id = req.params.id
@@ -129,4 +144,4 @@ const substituteDoc = async (req, res) => {
     }
 }
 
-module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc };
+module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc };
