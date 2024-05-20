@@ -516,3 +516,22 @@ body tr{
   color: black;
   margin-left: 15rem;
 }
+
+.dropdown{
+  justify-content:center;
+  align-items:center;
+  color:#35c625;
+}
+
+select{
+  border:none;
+  padding: 10px 20px;
+  border-radius:5px;
+  color: black;
+  background-color: white;
+  font-size: large;
+}
+
+select:focus{
+  outline:none;
+}

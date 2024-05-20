@@ -50,6 +50,40 @@ export const Kolhapur = () => {
                                         <p>Address: {address}</p>
                                         <p>Phone: {phone}</p>
                                     </div>
+                                    <div className="card-details">
+                                        {curElem.govtScheme.length ?
+                                            <>
+                                            <div className="dropdown">
+                                            <label for="scheme">Government Schemes available :</label>
+                                                    <select name="scheme" id="scheme1">
+                                                    {curElem.govtScheme.map((curScheme,index) => {
+                                                            return (<>
+                                                                <option key={index}>{curScheme}</option>
+                                                            </>)
+                                                        })}
+                                            </select>
+                                            </div>
+                                            </>
+                                            : <p className="dropdown">Sorry! No government schemes available in the hospital!</p>}
+                                    </div>
+                                    <br/>
+                                    <div className="card-details">
+                                        {curElem.insurance.length ?
+                                            <>
+                                            <div className="dropdown">
+                                            <label for="scheme">Insurance Scheme available :</label>
+                                                    <select name="scheme" id="scheme1">
+                                                    {curElem.insurance.map((curScheme,index) => {
+                                                            return (<>
+                                                                <option key={index}>{curScheme}</option>
+                                                            </>)
+                                                        })}
+                                            </select>
+                                            </div>
+                                            </> :
+                                            <p className="dropdown">No insurance schemes available in the hospital</p>
+                                        }
+                                    </div>
                                 </div>
                                 </>
                    

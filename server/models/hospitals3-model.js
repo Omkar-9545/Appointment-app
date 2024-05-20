@@ -5,6 +5,8 @@ const city3Schema = new mongoose.Schema({
     address: { type: String, required: true },
     phone: { type: String, required: true },
     doctors: { type: Array, required: true },
+    insurance: { type: Array, required: true },
+    govtScheme: { type: Array, required: true },
 });
 
 const Sanhospital = new mongoose.model("Sanhospital", city3Schema);
