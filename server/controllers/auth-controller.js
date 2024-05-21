@@ -118,14 +118,20 @@ const getSameDoc = async(req,res) => {
     try {
         const id = req.params.id
         const doctortype = await Doctor.findOne({ userId: id });
-        const alldoc = await Doctor.find({ specialization: doctortype.specialization, hospital: doctortype.hospital });
-        if (alldoc.length) {
-            return res.status(200).json({ message: "All doctor of same type fetched successfully", success: true, data: alldoc });
+        let alldoc = await Doctor.find({ specialization: doctortype.specialization, hospital: doctortype.hospital });
+        const result = alldoc.filter((curDoc) => {
+            if (curDoc.userId != id)
+                return curDoc;
+        })
+
+        if (result.length) {
+            return res.status(200).json({ message: "All doctor of same type fetched successfully", success: true, data: result });
         } else {
-            return res.status(200).json({ mssage: "There are no doctor of same type in the hospital", success: false });
+            return res.status(200).json({ message: "There are no doctor of same type in the hospital", success: true });
         }
     } catch (error) {
-        return res.status(500).json({ messge: "Error while getting same type doctor", success: false, error });
+        console.log(error)
+        return res.status(500).json({ message: "Error while getting same type doctor", success: false, error });
     }
 }
 

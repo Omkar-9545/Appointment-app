@@ -22,11 +22,13 @@ export const Substitute = () => {
                 setSameDoctor(response.data.data);
                 setLoad(true)
             } else {
-                toast.error(response.data.message);
                 setLoad(false)
+                alert(response.data.message);
             }
         } catch (error) {
-            next(error);
+            // next(error);
+            console.log(error)
+            toast.error("Some thing went wrong")
         }
     }
 
@@ -36,22 +38,29 @@ export const Substitute = () => {
     
     return (
         <>
-            <section className="user-section">
-                    <p>Choose any one of the following a substitute:</p>
-                    <div className="container">
-                        {sameDoctor.length && load
+            <section className="section-services">
+                <div className="container">
+                <h1>Choose any one of the following a substitute:</h1>
+                </div>
+                    <div className="grid grid-three-cols">
+                    { 
+                        load  && sameDoctor?
+                        sameDoctor.length
                             ?
-                            sameDoctor.map((curDoc) => {
+                            sameDoctor.map((curDoc,index) => {
                             const { firstName, lastName, startTime, endTime } = curDoc;
                             return (
                             <>
-                            <p><b>Dr.</b> {firstName} {lastName}</p>
-                                    <p><b>Timings:</b> {startTime} - {endTime}</p>
-                                </>
+                            <div className="card" key={index}>
+                                <p><b>Dr.</b> {firstName} {lastName}</p>
+                                <p><b>Timings:</b> {startTime} - {endTime}</p>
+                                <button>Add Substitute</button>
+                            </div>
+                            </>
                             )
-                        }):<p>No same doctors found</p>}
+                        }):"":<p>No doctors found of same specialization</p>}
                     </div>
-                
+               
             </section>
         </>
     )
