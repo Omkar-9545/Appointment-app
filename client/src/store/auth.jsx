@@ -63,7 +63,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (token) {
             userAuthentication();
-            getService();
+            if (!isLoading) {
+                getService();
+            }
         }
     }, [token]);
     

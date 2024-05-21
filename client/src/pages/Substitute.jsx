@@ -44,8 +44,11 @@ export const Substitute = () => {
                 body: JSON.stringify(obj)
             });
             // console.log(response);
+            const res_data = await response.json()
             if (response.ok) {
                 toast.success("Added Successfully");
+            } else {
+                toast.error(res_data.message);
             }
         } catch (error) {
             toast.error("Something went wrong")

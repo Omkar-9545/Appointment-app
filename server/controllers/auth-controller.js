@@ -139,13 +139,26 @@ const substituteDoc = async (req, res) => {
     try {
         const id = req.params.id
         const userId = req.body.userId
+        const reqdoc = await Doctor.findOne({ userId: id });
         const doctor = await Doctor.findOne({ userId });
+        const isPresent = await Substitute.findOne({ doctorId: reqdoc._id }, { substitutes: 1, _id: 0 });
+        var tmp = false,name="";
+        isPresent.substitutes.map((curSub) => {
+            if (curSub.userId == userId) {
+                tmp = true;
+                name = curSub.firstName
+            }
+        });
+            if (tmp) {
+                return res.status(400).json({ message: `Dr. ${name} is already your substitute doctor`, success: false });
+            }
+        
         const substitutes = [];
         substitutes.push(doctor)
-        const reqdoc = await Doctor.findOne({ userId: id });
         const subs = await Substitute.create({ substitutes, doctorId: reqdoc._id });
         return res.status(201).json({ message: "Added substitute doctor successfully", success: true, data: subs });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Error while fetching substitute doctors", success: false, error });
     }
 }
