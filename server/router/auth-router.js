@@ -21,6 +21,8 @@ router.route('/book-appointment').post(authMiddleware, authcontrollers.bookCtrl)
 
 router.route('/:id/substitute-doctors').post(authMiddleware, authcontrollers.substituteDoc)
 
-router .route('/:id/get-same-doc').get(authMiddleware,authcontrollers.getSameDoc)
+router.route('/:id/get-same-doc').get(authMiddleware, authcontrollers.getSameDoc)
+
+router.route('/:id/getsubstitutes').get(authMiddleware,authcontrollers.getSubstitute)
 
 module.exports = router;

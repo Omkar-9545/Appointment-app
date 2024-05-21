@@ -163,4 +163,20 @@ const substituteDoc = async (req, res) => {
     }
 }
 
-module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc };
+const getSubstitute = async (req, res) => {
+    try {
+        const docId = req.params.id
+        const substitutes = await Substitute.findOne({ doctorId: docId }, { substitutes: 1 });
+        if (substitutes) {
+            return res.status(200).json({ message: "Fetched all substitute doctors successfully", success: true, data: substitutes.substitutes });
+        }
+        else {
+            return res.status(200).json({ message: "No substitute doctors found!", success: false ,data:[]});
+        }
+    } catch (error) {
+        // console.log(error)
+        res.status(500).json({ message: "Error while getting substitute doctors", success: false, error });
+    }
+}
+
+module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc, getSubstitute };

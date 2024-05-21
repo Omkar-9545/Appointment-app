@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { Calendar } from 'react-date-range';
@@ -171,7 +171,7 @@ export const Booking = () => {
                             :
                             ""
                         }
-                        {!isAvailable && loaded ?<button className='btn btn-primary book'>Substitute Doctors</button>:""}
+                        {!isAvailable && loaded ? <Link to={`/${params.id}/substitutes`} className="updateLink">Substitute Doctors</Link> : ""}
                     </div>
                 </div>
          </section>
