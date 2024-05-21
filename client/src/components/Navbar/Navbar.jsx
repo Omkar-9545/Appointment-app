@@ -1,4 +1,4 @@
-import {NavLink, useNavigate} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import "./Navbar.css"
 import { useAuth } from '../../store/auth';
 
@@ -7,7 +7,6 @@ export const Navbar = () => {
     // const token = localStorage.getItem("token");
     // let isLoggedIn = !!token;
     const { isLoggedIn, user, isLoading } = useAuth();
-    const navigate = useNavigate()
     return (
         <>
             <header>
