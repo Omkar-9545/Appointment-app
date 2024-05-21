@@ -29,6 +29,7 @@ import { Options } from './pages/Options';
 import { DoctorLeave } from './pages/Doctor-leave';
 import { Substitute } from './pages/Substitute';
 import { Substitutes } from './pages/Substitutes';
+import { UserAppointment } from './pages/User-Appointment';
 
 const App = () => {
   return (
@@ -54,7 +55,8 @@ const App = () => {
           <Route path='/apply-doctor' element={<ApplyDoctor />} />
           <Route path='/:id/doc/profile' element={<DocProfile />} />
           <Route path='/:id/booking' element={<Booking />} />
-          <Route path='/:id/substitutes' element={<Substitutes/>} />
+          <Route path='/:id/substitutes' element={<Substitutes />} />
+          <Route path='/:id/getappointments' element={<UserAppointment/>} />
           <Route path='/notification' element={<Notification/>} />
           <Route path="/logout" element={<Logout />} />
           <Route path='/:id/substitute-doctors' element={<Substitute/>} />

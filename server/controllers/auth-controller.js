@@ -181,4 +181,20 @@ const getSubstitute = async (req, res) => {
     }
 }
 
-module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc, getSubstitute };
+const getUserAppointment = async (req, res) => {
+    try {
+        const id = req.params.id
+        const appointments = await appointmentModel.find({ 'userInfo._id': id });
+        if (appointments.length) {
+            return res.status(200).json({ message: "Fetched all user appointments successfully", success: true, data: appointments });
+        }
+        else {
+            return res.status(200).json({ message: "No appointments found", success: false, data: [] });
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: "Error while getting user appointments", success: false });
+    }
+}
+
+module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc, getSubstitute, getUserAppointment };

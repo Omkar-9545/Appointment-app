@@ -20,6 +20,7 @@ export const Booking = () => {
             userId: doctor.userId,
             doctorId: params.id,
             userInfo: user,
+            docInfo:doctor,
             date: date,
             time: "",
             status: "pending"
@@ -78,6 +79,7 @@ export const Booking = () => {
     appointment.date = date
     appointment.userId = doctor.userId
     appointment.userInfo = user
+    appointment.docInfo = doctor
 
     const availabilityHandler = async() => {
         try {
@@ -122,6 +124,7 @@ export const Booking = () => {
                     userId: "",
                     doctorId: "",
                     userInfo: "",
+                    docInfo:"",
                     date: "",
                     time: "",
                     status: "pending"})

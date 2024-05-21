@@ -40,7 +40,10 @@ export const Navbar = () => {
                              </> : "" }
                             </li>
                             {isLoggedIn && !isLoading && !user.isAdmin && !user.isDoctor ?
-                                <li><NavLink to="/services">Hospitals</NavLink></li>
+                                <>
+                                    <li><NavLink to={`/${user._id}/getappointments`}>Appointments</NavLink></li>
+                                    <li><NavLink to="/services">Hospitals</NavLink></li>
+                                </>
                                 : ""
                             }
                             

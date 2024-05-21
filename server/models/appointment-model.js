@@ -13,6 +13,10 @@ const appointmentSchema = mongoose.Schema({
         type: Object,
         require:[true,'user info is required']
     },
+    docInfo: {
+        type: Object,
+        require:[true,'doctor info is required']
+    },
     date: {
         type: String,
         require: [true, 'date is required']
