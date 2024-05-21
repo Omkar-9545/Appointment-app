@@ -141,11 +141,13 @@ export const Booking = () => {
         <>
             <section>
                 <div className="container">
+                    {!load ? 
                     <div className="doc-details">
                         <p><b>Dr.</b> {doctor.firstName} {doctor.lastName}</p>
                         <p><b>Specialization:</b> {doctor.specialization}</p>
                         <p><b>Timings:</b> {doctor.startTime} - {doctor.endTime}</p>
                     </div>
+                    :<p>Loading doc details...</p>}
                     <div className="check-info">
                         <Calendar
                             id="appointment-date"
