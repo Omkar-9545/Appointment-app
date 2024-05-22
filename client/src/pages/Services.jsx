@@ -18,12 +18,13 @@ export const Service = () => {
                             if (name.toLowerCase() == "kolhapur") {
                                 return (
                                     <><div className="card" key={index}>
-                                        <div className="card-img">
-                                            <NavLink to="/kolhapur" >Know more</NavLink>
-                                        </div>
+                                        
                                         <div className="card-details">
                                             <h2>{name}</h2>
                                             <p>Phone: {phone}</p>
+                                        </div>
+                                        <div className="card-img">
+                                            <NavLink to="/kolhapur" key={index}>Know more</NavLink>
                                         </div>
                                     </div>
                                     </>
@@ -33,12 +34,13 @@ export const Service = () => {
                             else if (name.toLowerCase() == "gadhinglaj") {
                                 return (
                                     <><div className="card" key={index}>
-                                        <div className="card-img">
-                                            <NavLink to="/gadhinglaj">Know more</NavLink>
-                                        </div>
+                                        
                                         <div className="card-details">
                                             <h2>{name}</h2>
                                             <p>Phone: {phone}</p>
+                                        </div>
+                                        <div className="card-img">
+                                            <NavLink to="/gadhinglaj">Know more</NavLink>
                                         </div>
                                     </div>
                                     </>
@@ -48,12 +50,13 @@ export const Service = () => {
                             else if (name.toLowerCase() == "sangli") {
                                 return (
                                     <><div className="card" key={index}>
-                                        <div className="card-img">
-                                            <NavLink to="/sangli">Know more</NavLink>
-                                        </div>
+                                        
                                         <div className="card-details">
                                             <h2>{name}</h2>
                                             <p>Phone: {phone}</p>
+                                        </div>
+                                        <div className="card-img">
+                                            <NavLink to="/sangli">Know more</NavLink>
                                         </div>
                                     </div>
                                     </>

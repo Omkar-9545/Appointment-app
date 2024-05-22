@@ -536,3 +536,7 @@ select{
 select:focus{
   outline:none;
 }
+
+.not-found-text{
+  font-size: xx-large;
+}

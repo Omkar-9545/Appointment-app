@@ -197,4 +197,8 @@ const getUserAppointment = async (req, res) => {
     }
 }
 
-module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc, getSubstitute, getUserAppointment };
+const Reschedule = async(req,res) => {
+    
+}
+
+module.exports = { home, register, login, authctrl, bookCtrl, substituteDoc, getSameDoc, getSubstitute, getUserAppointment, Reschedule };

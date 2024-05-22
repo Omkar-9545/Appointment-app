@@ -25,6 +25,8 @@ router.route('/:id/get-same-doc').get(authMiddleware, authcontrollers.getSameDoc
 
 router.route('/:id/getsubstitutes').get(authMiddleware, authcontrollers.getSubstitute)
 
-router.route('/:id/getappointments').get(authMiddleware,authcontrollers.getUserAppointment)
+router.route('/:id/getappointments').get(authMiddleware, authcontrollers.getUserAppointment)
+
+router.route('/:id/reschedule').post(authMiddleware,authcontrollers.Reschedule)
 
 module.exports = router;

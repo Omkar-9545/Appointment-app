@@ -25,8 +25,7 @@ export const Booking = () => {
             time: "",
             status: "pending"
         });
-    
-    
+        
     const getDocInfo = async () => {
         try {
             setLoad(true);
