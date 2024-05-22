@@ -72,7 +72,7 @@ const getAppointment = async (req, res) => {
         if (appointments.length > 0) {
             return res.status(200).json({ message: "All appointments fetched successfully", success: true, data: appointments });
         }
-        return res.status(200).json({ message: "No appointments found", success: false });
+        return res.status(200).json({ message: "No appointments found", success: false, data: [] });
     } catch (error) {
         return res.status(500).json({ message: "Error while getting all the appointments", success: false, error });
     }

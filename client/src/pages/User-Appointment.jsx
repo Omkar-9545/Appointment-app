@@ -20,9 +20,6 @@ export const UserAppointment = () => {
             if (response.data.success) {
                 setAppointments(response.data.data)
             }
-            else {
-                toast.error(response.data.message)
-            }
         } catch (error) {
             next(error)
         }
@@ -48,7 +45,8 @@ export const UserAppointment = () => {
     }, []);
 
     return <>
-            <section className="admin-users-setion">
+        <section className="admin-users-setion">
+            {appointments.length ? <>
                 <div className="container">
                     <h1>Appointments</h1>
                 </div>
@@ -77,6 +75,7 @@ export const UserAppointment = () => {
                         </tbody>
                     </table>
                 </div>
+                </>:<p>No appointments available!</p>}
             </section>
     </>
 }

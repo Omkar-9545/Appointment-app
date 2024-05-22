@@ -29,7 +29,7 @@ export const Appointment = () => {
             // console.log(error)
             toast.error("Error while getting Appointments")
         }
-        }
+    }
         useEffect(() => {
             getAppointment();
         }, [])
@@ -54,7 +54,9 @@ export const Appointment = () => {
     }
     
     return <>
-             <section className="admin-users-section">
+        <section className="admin-users-section">
+            { appointments.length ?
+                <>
                 <div className="container">
                     <h1>Appointments</h1>
                 </div>
@@ -99,6 +101,9 @@ export const Appointment = () => {
                         </tbody>
                     </table>
                 </div>
+                </>
+                :<p>No appointments present</p>
+            }
             </section>
         </>
         

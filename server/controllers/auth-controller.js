@@ -189,7 +189,7 @@ const getUserAppointment = async (req, res) => {
             return res.status(200).json({ message: "Fetched all user appointments successfully", success: true, data: appointments });
         }
         else {
-            return res.status(200).json({ message: "No appointments found", success: false, data: [] });
+            return res.status(200).json({ message: "No appointments found", success: true, data: [] });
         }
     } catch (error) {
         console.log(error)
