@@ -4,8 +4,6 @@ import { useAuth } from '../../store/auth';
 
 export const Navbar = () => {
 
-    // const token = localStorage.getItem("token");
-    // let isLoggedIn = !!token;
     const { isLoggedIn, user, isLoading } = useAuth();
     return (
         <>
@@ -16,33 +14,51 @@ export const Navbar = () => {
                     </div>
                     <nav>
                         <ul>
-                            <li >
-                                <NavLink to="/">Home</NavLink>
-                            </li>
+                            
                             <li>
-                            { isLoggedIn && !isLoading && user.isAdmin ? <NavLink to="/admin">Admin menu</NavLink>:""}
+                                {isLoggedIn && !isLoading && user.isAdmin ? <>
+                                    <ul>
+                                    <li><NavLink to="/admin">Admin menu</NavLink></li>
+                                    <li><NavLink to="/profile">Account</NavLink></li></ul></>: ""}
                             </li>
                             <li>
                                 {isLoggedIn && !isLoading && !user.isAdmin && user.isDoctor ?
-                                    // trying out dropdown menu
                                     <>
                                     <div className="dropdown1">
                                         <select name="menu" id="menu1">
                                                 <option selected hidden>Doctor Menu</option>      
                                             </select>
                                             <div className="dropdown-options">
-                                                <NavLink to={`/${user._id}/doc/profile`} className="link">Doctor Profile</NavLink> 
                                                 <NavLink to={`/${user._id}/appointments`} className="link"> Appointments</NavLink>
                                                 <NavLink to={`/${user._id}/leaves`} className="link">Apply Leaves</NavLink>
+                                        </div>
+                                        </div>
+                                        
+                                        <div className="dropdown1">
+                                        <select name="menu" id="menu1">
+                                                <option selected hidden>Account</option>      
+                                            </select>
+                                            <div className="dropdown-options">
+                                                <NavLink to="/profile" className="link">{user.name.toUpperCase()}</NavLink>
+                                                <NavLink to={`/${user._id}/doc/profile`} className="link">Doctor Profile</NavLink>
                                                 <NavLink to={`/${user._id}/substitute-doctors`} className="link">Add Substitute Doctor</NavLink>
                                         </div>
-                                        </div>         
+                                        </div>
+
                              </> : "" }
                             </li>
                             {isLoggedIn && !isLoading && !user.isAdmin && !user.isDoctor ?
                                 <>
-                                    <li><NavLink to={`/${user._id}/getappointments`}>Appointments</NavLink></li>
-                                    <li><NavLink to="/services">Hospitals</NavLink></li>
+                                    <div className="dropdown1">
+                                        <select name="menu" id="menu1">
+                                                <option selected hidden>Account</option>      
+                                            </select>
+                                        <div className="dropdown-options">
+                                            <NavLink to="/profile" className="link">{user.name.toUpperCase()}</NavLink>
+                                            <NavLink to={`/${user._id}/getappointments`} className="link"> Appointments</NavLink>
+                                            <NavLink to={`/services`} className="link">Hospitals</NavLink>
+                                        </div>
+                                        </div>
                                 </>
                                 : ""
                             }
@@ -52,7 +68,6 @@ export const Navbar = () => {
                                     ?
                                     
                                         <ul>
-                                            <li><NavLink to="/profile">User Profile</NavLink></li>
                                             <li><NavLink to="/logout">Logout</NavLink></li>
                                             <li>
                                                 <a href="/notification" class="notification">
@@ -64,6 +79,7 @@ export const Navbar = () => {
                                     :
                                     <>
                                     <ul>
+                                        <li ><NavLink to="/">Home</NavLink></li>        
                                         <li ><NavLink to="/about">About</NavLink></li>
                                         <li ><NavLink to="/register">SignUp</NavLink></li>
                                         <li ><NavLink to="/login">Login</NavLink></li>
