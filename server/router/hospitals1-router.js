@@ -31,7 +31,7 @@ router.route("/:id/doc/profile/update").patch(authMiddleware, docContrl.updatePr
 
 router.route('/:id/booking').get(authMiddleware, booking.getDocInfo)
 
-router.route('/available').post(validate(appointmentSchema),authMiddleware, booking.checkAvailablility)
+router.route('/available').post(authMiddleware, booking.checkAvailablility)
 
 router.route('/:id/appointments').get(authMiddleware, booking.getAppointment)
 

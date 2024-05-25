@@ -33,35 +33,37 @@ const applyLeaves = async(req,res) => {
 const checkAvailablility = async (req, res) => {
     try {
         const doctorId = req.body.doctorId
-        const date = moment(req.body.date, 'DD-MM-YYYY').toISOString()
-        const isonLeave = await Leave.find({ doctorId });
-        if (isonLeave.length) {
-            if (date >= isonLeave[isonLeave.length - 1].startDate && date <= isonLeave[isonLeave.length - 1].endDate) {
-                return res.status(200).json({ message: "Doctor is on leave", success: false });
-            }
-        }
-        const time = moment(req.body.time,"HH:mm").toISOString()
-        const fromTime = moment(req.body.time, 'HH:mm').subtract(0.5, 'hours').toISOString()
-        const toTime = moment(req.body.time, 'HH:mm').add(0.5, 'hours').toISOString()
+        
+        const time = moment(req.body.time, "HH:mm A").toISOString()
         const doctime = await Doctor.findOne({ _id: doctorId }, { startTime: 1, endTime: 1 });
         const stTime = moment(doctime.startTime, "HH:mm").toISOString()
         const edTime = moment(doctime.endTime, "HH:mm").subtract(0.5, 'hours').toISOString();
-        if (time < stTime || time > edTime) return res.status(200).json({ message: "Please check doctor availability timings", success: false });
-        const appointments = await appointmentModel.find({
-            doctorId,
-            date,
-            time: {
-                $gte: fromTime, $lte: toTime
-            },
-        })
-        if (appointments.length > 0) {
-            return res.status(200).json({ message: "Appointment is not available at this time", success: false });
-        } else {
-            return res.status(200).json({ message: "Appointment available", success: true });
+
+        if (!(time >= stTime && time <= edTime)) {
+            let tmp = new Array(7).fill({ reason: "T", success: false });
+            return res.status(200).json({ message: "Fetched all availability", suc: true, data: tmp });
         }
+        let ans = [];
+        const dates = req.body.appdates;
+        const appointments = await appointmentModel.find({ doctorId }, { date: 1, _id: 0, time: 1 });
+        for (let i = 0; i < 7; i++){
+            const date = moment(dates[i], 'DD-MM-YYYY').toISOString()
+            let doesdateExist = appointments.filter((obj) => { return obj.date == date })
+            if (!doesdateExist.length) {
+                ans.push({ reason: "A", success: true });
+            } else {
+                let doesappExist = appointments.filter((obj) => { return obj.time == time })
+                if (doesappExist.length) {
+                    ans.push({ reason: "B", success: false });
+                } else {
+                    ans.push({ reason: "A", success: true });  
+                }
+            }
+        } 
+        return res.status(200).json({ message: "Fetched all availability", suc: true, data: ans });   
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: "Error while checking availability", success: false, error });
+        res.status(500).json({ message: "Error while checking availability", suc: false, error });
     }
 }
 

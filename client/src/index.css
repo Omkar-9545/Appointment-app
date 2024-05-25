@@ -359,7 +359,7 @@ a.active{
   margin-bottom: 60px;
 }
 
-th{
+.tab th{
   font-size: 1.8rem;
   letter-spacing: 0.08rem;
   padding: 4rem;
@@ -374,7 +374,7 @@ th{
   }
 }
 
-td{
+.tab td{
   font-size: 1.7rem;
   letter-spacing: 0.06rem;
   padding: 1rem;
@@ -383,7 +383,7 @@ td{
   width: 30rem;
 }
 
-table{
+.tab{
   background: #fff;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
   border-collapse: collapse;
@@ -394,7 +394,7 @@ table{
   -o-border-radius:1rem;
 }
 
-body tr{
+.tab tr{
   display: grid;
   grid-template-columns: repeat(6,minmax(10rem,1fr));
   align-items: center;
@@ -459,7 +459,7 @@ body tr{
 .doctor{
   display: grid;
   grid-template-columns: repeat(4,minmax(2rem,1fr)) !important;
-  align-items: center;
+  /* align-items: center; */
   box-shadow: 0 0.3rem 0 grey;
   margin-bottom: 20px;
   border-bottom: 4px solid transparent;
@@ -472,12 +472,12 @@ body tr{
 }
 
 .doc-tr{
-  display: grid;
-  grid-template-columns: repeat(4,minmax(10rem,1fr));
-  align-items: center;
+  display: flex;
+  /* grid-template-columns: repeat(4,minmax(10rem,1fr)); */
+  /* align-items: center; */
   box-shadow: 0 0.3rem 0 grey;
-  margin-bottom: 10px;
-  border-bottom: 4px solid transparent;
+  /* margin-bottom: 10px; */
+  border-bottom: 2px solid transparent;
   color: var(--bg-color);
 
   &:last-child{
@@ -539,4 +539,60 @@ select:focus{
 
 .not-found-text{
   font-size: xx-large;
+}
+
+#calendar{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: 6rem;
+  border-left: 3px solid #35c625;
+  border-right: 3px solid #35c625;
+}
+
+#calendar th,#calendar td{
+  border: 1px solid red;
+  padding: 8px;
+}
+
+#calendar td:hover {
+  background-color: #393fae;
+  cursor: pointer;
+  &:first-child{
+    cursor: default;
+  }
+}
+
+#calendar th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #cff6dd;
+  color: black;
+}
+
+.cal-container{
+  overflow: auto;
+  height: 66vh;
+  width: auto;
+}
+
+.cal-container tr th{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#submit{
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#date{
+  margin-bottom: 8px;
+}
+
+#date-label{
+  margin-left: 1075px;
+  font-weight: 800;
 }
