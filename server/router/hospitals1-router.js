@@ -8,7 +8,6 @@ const validate = require("../middlewares/validate-middleware");
 const docSchema = require("../validators/doc-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
 const booking = require("../controllers/booking-controller");
-const appointmentSchema = require("../validators/appointment-validator");
 const leaveSchema = require("../validators/leave-validator");
 
 router.route("/kolhapur").get(authMiddleware,h1.hospitals1);

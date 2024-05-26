@@ -588,11 +588,22 @@ select:focus{
   margin-left: 10px;
 }
 
-#date{
-  margin-bottom: 8px;
-}
-
-#date-label{
-  margin-left: 1075px;
-  font-weight: 800;
+.date-form{
+  & label {
+    display: block;
+    margin: 2.4rem 0 0.8rem 13rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  & input{
+    width: 20%;
+    padding: 0.6rem 0.6rem;
+    margin-left: 27%;
+    &:last-child{
+      box-sizing: border-box;
+      border-radius: 2rem;
+      margin-left: 6rem;
+    }
+  }
+  
 }
